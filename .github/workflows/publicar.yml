@@ -1,0 +1,64 @@
+name: Horarios del día y publicar
+on:
+  schedule:
+    - cron: "40 2 * * *"   # cada madrugada (hora española ~03:40-04:40)
+  push:
+    branches: [main]
+    paths: ["src/**", "tools/**", "worker/**"]
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency: { group: datos, cancel-in-progress: false }
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Descargar horarios oficiales de Renfe (GTFS)
+        run: |
+          curl -fsSL -A "Mozilla/5.0" -o gtfs.zip https://ssl.renfe.com/gtransit/Fichero_AV_LD/google_transit.zip
+          unzip -o -q gtfs.zip -d gtfs
+      - name: Generar datos
+        run: |
+          HOY=$(TZ=Europe/Madrid date +%F)
+          MANANA=$(TZ=Europe/Madrid date -d tomorrow +%F)
+          HIST=""
+          if [ -d historico ]; then
+            mkdir -p ult30
+            for i in $(seq 1 30); do d=$(date -u -d "-$i day" +%Y/%m/flota-%Y-%m-%d.csv); [ -f "historico/$d" ] && cp "historico/$d" ult30/; done
+            [ "$(ls ult30 | wc -l)" -ge 7 ] && HIST="--historico ult30"
+          fi
+          python3 tools/build_data.py --gtfs gtfs --fecha "$HOY" $HIST --out data
+          python3 tools/build_data.py --gtfs gtfs --fecha "$MANANA" --out data
+          # el histórico solo hace falta de los últimos 45 días
+          LIM=$(date -u -d "-45 day" +%F)
+          for f in historico/*/*/flota-*.csv; do [ -f "$f" ] || continue; d=$(basename "$f" .csv); d=${d#flota-}; [[ "$d" < "$LIM" ]] && git rm -q "$f"; done
+          # borra horarios de días pasados
+          find data -name 'horarios-*.json' ! -name "horarios-$HOY.json" ! -name "horarios-$MANANA.json" -delete
+          ULT=$(ls historico/*/*/flota-*.csv 2>/dev/null | tail -1)
+          python3 tools/bundle.py --fecha "$HOY" --api "${{ vars.LLEGADA_API }}" ${ULT:+--instantanea "$ULT"} --standalone --out index.html
+      - name: Guardar datos
+        run: |
+          git config user.name "llegada-bot"
+          git config user.email "llegada-bot@users.noreply.github.com"
+          git add data index.html
+          git diff --cached --quiet || git commit -m "Horarios $(TZ=Europe/Madrid date +%F)"
+          git pull --rebase -q && git push -q
+      - name: Preparar web
+        run: |
+          mkdir -p _site/data
+          cp index.html manifest.webmanifest sw.js icon.svg icon-192.png icon-512.png _site/
+          cp data/horarios-*.json data/estaciones.json _site/data/
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: _site }
+  desplegar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment: { name: github-pages, url: "${{ steps.d.outputs.page_url }}" }
+    steps:
+      - id: d
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,16 @@
+{
+  "name": "Llegada · trenes en directo",
+  "short_name": "Llegada",
+  "description": "Dónde está tu tren, si lleva retraso y a qué hora salir a recoger a alguien.",
+  "lang": "es",
+  "start_url": "./#mapa",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f4f1",
+  "theme_color": "#1f56b8",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

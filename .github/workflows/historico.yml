@@ -1,0 +1,23 @@
+name: Guardar posiciones (puntualidad)
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: { group: datos, cancel-in-progress: false }
+jobs:
+  capturar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: python3 tools/capturar.py historico
+      - name: Guardar
+        run: |
+          git config user.name "llegada-bot"
+          git config user.email "llegada-bot@users.noreply.github.com"
+          git add historico
+          git diff --cached --quiet || git commit -m "Posiciones $(date -u +%FT%H:%MZ)"
+          git pull --rebase -q && git push -q
