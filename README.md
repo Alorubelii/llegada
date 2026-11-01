@@ -43,7 +43,7 @@ La app funciona en tres niveles y siempre muestra en la barra superior cuál est
 
 ### 1. Subir el proyecto a GitHub
 
-Crea un repositorio nuevo llamado `llegada` en tu cuenta `rubenmanchatrans-design` y sube todo el contenido de esta carpeta.
+Crea un repositorio nuevo llamado `llegada` en tu cuenta `Alorubelii` y sube todo el contenido de esta carpeta.
 
 ```
 git init
@@ -62,7 +62,7 @@ git branch -M main
 ```
 
 ```
-git remote add origin https://github.com/rubenmanchatrans-design/llegada.git
+git remote add origin https://github.com/Alorubelii/llegada.git
 ```
 
 ```
@@ -113,7 +113,7 @@ En el repositorio: **Settings → Secrets and variables → Actions → Variable
 Luego ve a **Actions → Horarios del día y publicar → Run workflow**. En un par de minutos la app estará en:
 
 ```
-https://rubenmanchatrans-design.github.io/llegada/
+https://alorubelii.github.io/llegada/
 ```
 
 ### 5. Instalarla en el móvil
