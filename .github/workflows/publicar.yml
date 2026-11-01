@@ -4,7 +4,7 @@ on:
     - cron: "40 2 * * *"   # cada madrugada (hora española ~03:40-04:40)
   push:
     branches: [main]
-    paths: ["src/**", "tools/**", "worker/**"]
+    paths: ["src/**", "tools/**", "worker/**", ".github/workflows/publicar.yml"]
   workflow_dispatch:
 permissions:
   contents: write
@@ -40,7 +40,7 @@ jobs:
           # borra horarios de días pasados
           find data -name 'horarios-*.json' ! -name "horarios-$HOY.json" ! -name "horarios-$MANANA.json" -delete
           ULT=$(ls historico/*/*/flota-*.csv 2>/dev/null | tail -1)
-          python3 tools/bundle.py --fecha "$HOY" --api "${{ vars.LLEGADA_API }}" ${ULT:+--instantanea "$ULT"} --standalone --out index.html
+          python3 tools/bundle.py --fecha "$HOY" --api "${{ vars.LLEGADA_API || 'https://red-lake-b94e.stomvi7.workers.dev' }}" ${ULT:+--instantanea "$ULT"} --standalone --out index.html
       - name: Guardar datos
         run: |
           git config user.name "llegada-bot"
