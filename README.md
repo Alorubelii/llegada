@@ -4,13 +4,13 @@ App web para el móvil (se instala como una app) que muestra los trenes de Renfe
 
 **Qué hace**
 
-- **Mapa**: todos los trenes en circulación, coloreados por retraso (verde en hora, ámbar 6–15 min, rojo más de 15). Filtros por tipo de tren, búsqueda por número, ciudad o estación, y botón de estación más cercana.
-- **Ficha de cada tren**: origen, destino, próxima parada, hora prevista corregida con el retraso, recorrido completo y su puntualidad del último mes.
-- **Panel de estación**: salidas y llegadas de las próximas tres horas con estado real, como el letrero del andén. Por defecto, Ciudad Real.
-- **Recoger a alguien**: pones el tren, la estación y lo que tardas en llegar, y te dice a qué hora salir de casa. Se recalcula solo si el tren se retrasa.
-- **Mis trenes**: sigues un tren y te avisa (notificación del móvil) cuando su retraso pasa del límite que elijas, cuando cambia 5 minutos o más, y cuando termina.
-- **Puntualidad**: ranking de los trenes más y menos puntuales del último mes, filtrable por estación.
-- **Avisos de la red**: incidencias de Adif, que cubren a todos los operadores (Renfe, Iryo y Ouigo), y avisos de Renfe Cercanías.
+- **Inicio personal**: te saluda por tu nombre y te enseña de un vistazo tus trayectos guardados con el próximo tren y su retraso, los trenes que sigues y las próximas salidas de tu estación.
+- **Mapa**: todos los trenes en circulación, coloreados por retraso, sobre las vías dibujadas. Se mueven con suavidad al actualizarse. Filtros por tipo de tren, búsqueda por número, ciudad o estación, y Cercanías opcional con datos en directo.
+- **Ficha de cada tren**: próxima parada, hora corregida con el retraso, recorrido completo, puntualidad del último mes, botón de avisos, "voy a recogerlo" y compartir por WhatsApp la hora de llegada.
+- **Estación**: próxima salida o llegada destacada, lista con estado real, filtro por destino, estaciones favoritas, "cerca de mí" y guardar el trayecto en Inicio.
+- **Recoger a alguien**: tren, estación y lo que tardas en llegar, y te dice a qué hora salir de casa. Se recalcula solo.
+- **Tú**: nombre, estación de casa, favoritas, trayectos, avisos, tema claro u oscuro, puntualidad de la red, avisos de Adif y de dónde salen los datos. Todo se guarda solo en el móvil.
+- **Bienvenida** la primera vez para elegir tu estación.
 
 **Lo que no puede hacer (y por qué)**
 

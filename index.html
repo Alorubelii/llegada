@@ -1,43 +1,43 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="icon-192.png"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>Llegada</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Trenes de Alta Velocidad, Larga y Media Distancia en el mapa, con retrasos, paneles de estación y avisos.">
-<meta name="theme-color" content="#f3f4f1">
+<meta name="description" content="Dónde está tu tren, si lleva retraso y a qué hora salir a recoger a alguien.">
+<meta name="theme-color" content="#f4f5f2">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Doto:wght@600;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
-/* Layout: app de una pantalla. Barra superior con estado de los datos, vista activa en el centro, pestañas abajo en móvil y a la izquierda en escritorio. El panel de estación es un letrero de andén. */
+/* Layout: app de una pantalla. Barra superior con estado de los datos, la vista activa en el centro y las pestañas abajo (izquierda en escritorio). Tarjetas blancas sobre un fondo gris verdoso; el azul marca lo que se puede tocar y el ámbar es el punto de la marca. */
 :root{
-  --bg:#f3f4f1; --surface:#ffffff; --sunk:#e8eae5; --line:#d5d8d0; --fg:#191c1f; --muted:#5f6560;
-  --accent:#1f56b8; --accent-ink:#ffffff; --accent-soft:#dfe7f6;
-  --ok:#1d8a4e; --warn:#c77a00; --bad:#c8352b; --none:#8c928b;
-  --land:#ffffff; --land-2:#ebede8; --sea:#dfe5e6; --coast:#b9c0b8; --station:#9aa39b;
-  --board:#121416; --board-fg:#ffb53d; --board-dim:#6b5a3a; --board-line:#2a2d30;
-  --shadow:0 1px 2px rgba(20,24,28,.06),0 8px 24px rgba(20,24,28,.10);
+  --bg:#f4f5f2; --surface:#ffffff; --sunk:#eceee9; --line:#dcdfd8; --line-2:#e7e9e4; --fg:#16191c; --muted:#5d645e; --faint:#8a918a;
+  --accent:#1f56b8; --accent-ink:#ffffff; --accent-soft:#e2e9f7; --brand:#f2a531;
+  --ok:#1b8a4c; --warn:#b97000; --bad:#c7362b; --none:#8c928b;
+  --ok-soft:#e1f2e8; --warn-soft:#fbefd9; --bad-soft:#f9e3e0;
+  --land:#ffffff; --land-2:#ecefe9; --sea:#dde4e5; --coast:#bcc3bb; --rail:#c9cfc7; --station:#a2aaa2;
+  --shadow:0 1px 2px rgba(20,24,28,.05),0 6px 20px rgba(20,24,28,.08);
+  --shadow-lg:0 2px 6px rgba(20,24,28,.08),0 18px 48px rgba(20,24,28,.16);
   --f-ui:"Archivo",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --f-num:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  --f-board:"Doto","IBM Plex Mono",ui-monospace,monospace;
-  --r:10px;
+  --r:14px;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#111315; --surface:#1a1d20; --sunk:#202428; --line:#2e3338; --fg:#e9ebe7; --muted:#9aa19b;
-  --accent:#7aa5f0; --accent-ink:#0d1420; --accent-soft:#1d2a40;
-  --ok:#3fbf75; --warn:#f0a531; --bad:#ef6458; --none:#6e756f;
-  --land:#1d2124; --land-2:#171a1c; --sea:#0d0f11; --coast:#363c41; --station:#4f5852;
-  --board:#07080a; --board-fg:#ffb53d; --board-dim:#5a4b30; --board-line:#1d2023;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.45); color-scheme:dark}}
+  --bg:#101214; --surface:#191c1f; --sunk:#202428; --line:#2d3237; --line-2:#24292d; --fg:#eaece8; --muted:#9ba29c; --faint:#6f7670;
+  --accent:#7ea8f2; --accent-ink:#0c1322; --accent-soft:#1c2940; --brand:#f2a531;
+  --ok:#43c27a; --warn:#f0a83a; --bad:#f06a5d; --none:#6e756f;
+  --ok-soft:#16301f; --warn-soft:#352812; --bad-soft:#3a1d1a;
+  --land:#1c2023; --land-2:#16191b; --sea:#0c0e10; --coast:#353b40; --rail:#2f363b; --station:#4c554f;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 6px 20px rgba(0,0,0,.35); --shadow-lg:0 2px 6px rgba(0,0,0,.4),0 18px 48px rgba(0,0,0,.55); color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#111315; --surface:#1a1d20; --sunk:#202428; --line:#2e3338; --fg:#e9ebe7; --muted:#9aa19b;
-  --accent:#7aa5f0; --accent-ink:#0d1420; --accent-soft:#1d2a40;
-  --ok:#3fbf75; --warn:#f0a531; --bad:#ef6458; --none:#6e756f;
-  --land:#1d2124; --land-2:#171a1c; --sea:#0d0f11; --coast:#363c41; --station:#4f5852;
-  --board:#07080a; --board-fg:#ffb53d; --board-dim:#5a4b30; --board-line:#1d2023;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.45); color-scheme:dark}
+  --bg:#101214; --surface:#191c1f; --sunk:#202428; --line:#2d3237; --line-2:#24292d; --fg:#eaece8; --muted:#9ba29c; --faint:#6f7670;
+  --accent:#7ea8f2; --accent-ink:#0c1322; --accent-soft:#1c2940; --brand:#f2a531;
+  --ok:#43c27a; --warn:#f0a83a; --bad:#f06a5d; --none:#6e756f;
+  --ok-soft:#16301f; --warn-soft:#352812; --bad-soft:#3a1d1a;
+  --land:#1c2023; --land-2:#16191b; --sea:#0c0e10; --coast:#353b40; --rail:#2f363b; --station:#4c554f;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 6px 20px rgba(0,0,0,.35); --shadow-lg:0 2px 6px rgba(0,0,0,.4),0 18px 48px rgba(0,0,0,.55); color-scheme:dark}
 
 *{box-sizing:border-box}
 html,body{height:100%}
-body{background:var(--bg);color:var(--fg);font-family:var(--f-ui);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow:hidden}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-ui);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow:hidden;-webkit-tap-highlight-color:transparent}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer}
@@ -47,29 +47,98 @@ button{cursor:pointer}
 
 /* Barra superior */
 .top{display:flex;align-items:center;gap:12px;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:var(--surface);border-bottom:1px solid var(--line);position:relative;z-index:5}
-.brand{display:flex;align-items:baseline;gap:8px;min-width:0}
-.brand b{font-weight:800;font-stretch:125%;font-size:20px;letter-spacing:-.01em}
-.brand span{color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.status{margin-left:auto;display:flex;align-items:center;gap:7px;padding:5px 10px;border-radius:999px;background:var(--sunk);font-size:12.5px;font-weight:600;white-space:nowrap;border:0}
+.brand{display:flex;align-items:center;gap:8px;min-width:0;border:0;background:none;padding:0}
+.brand svg{width:26px;height:26px;flex:none}
+.brand b{font-weight:800;font-stretch:118%;font-size:20px;letter-spacing:-.015em}
+.status{margin-left:auto;display:flex;align-items:center;gap:7px;padding:6px 11px;border-radius:999px;background:var(--sunk);font-size:12.5px;font-weight:600;white-space:nowrap;border:0;min-width:0}
+.status span{overflow:hidden;text-overflow:ellipsis}
 .status i{width:8px;height:8px;border-radius:50%;background:var(--none);flex:none}
-.status[data-mode="live"] i{background:var(--ok);box-shadow:0 0 0 0 var(--ok);animation:pulse 2s infinite}
+.status[data-mode="live"] i{background:var(--ok);animation:pulse 2s infinite}
 .status[data-mode="mirror"] i{background:var(--warn)}
 .status[data-mode="snapshot"] i{background:var(--accent)}
 @keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 60%,transparent)}70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
 
 /* Pestañas */
-.tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));background:var(--surface);border-top:1px solid var(--line);padding-bottom:0;padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
-.tabs button{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:none;border:0;padding:8px 2px 9px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11.5px;font-weight:600;color:var(--muted);letter-spacing:.01em}
+.tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));background:var(--surface);border-top:1px solid var(--line);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+.tabs button{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:none;border:0;padding:8px 2px 9px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11.5px;font-weight:600;color:var(--muted)}
 .tabs svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .tabs button[aria-selected="true"]{color:var(--accent)}
+.tabs button[aria-selected="true"] svg{stroke-width:2.2}
 .main{position:relative;min-height:0;overflow:hidden}
-.view{position:absolute;inset:0;overflow:auto;-webkit-overflow-scrolling:touch}
-.view[hidden]{display:none!important}
-.pad{padding-block:18px 28px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
-h2{font-size:22px;font-weight:800;font-stretch:112%;letter-spacing:-.01em;margin:0;text-wrap:balance}
-h3{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0}
+.view{position:absolute;inset:0;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.pad{padding-block:20px 32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+.pad>*{min-width:0}
+h1{font-size:28px;line-height:1.1;font-weight:800;font-stretch:115%;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h2{font-size:20px;font-weight:800;font-stretch:110%;letter-spacing:-.01em;margin:0;text-wrap:balance}
+h3{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin:0}
 p{margin:0}
 .lede{color:var(--muted);max-width:62ch}
+.sec{display:flex;flex-direction:column;gap:10px}
+.sec-h{display:flex;align-items:baseline;gap:10px}
+.sec-h .link{margin-left:auto}
+.link{background:none;border:0;color:var(--accent);font-weight:700;font-size:13.5px;padding:4px 0}
+.muted{color:var(--muted)}
+
+/* Piezas comunes */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);min-width:0}
+.card.pad-in{padding:16px;display:flex;flex-direction:column;gap:12px}
+.pill{display:inline-flex;align-items:center;gap:5px;font-weight:700;font-size:12.5px;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}.pill.warn{background:var(--warn-soft);color:var(--warn)}.pill.bad{background:var(--bad-soft);color:var(--bad)}.pill.none{background:var(--sunk);color:var(--muted)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.02em;padding:2px 7px;border-radius:5px;background:var(--sunk);color:var(--muted);white-space:nowrap}
+.tag.av{background:var(--accent-soft);color:var(--accent)}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:11px;padding:10px 14px;font-weight:700;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.ghost{border-color:transparent;background:var(--sunk)}
+.btn svg,.ic{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;max-width:100%}
+.chips::-webkit-scrollbar{display:none}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.chip .num{opacity:.7;font-size:12px}
+.chip svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label,.lab{font-size:12.5px;font-weight:700;color:var(--muted)}
+.input{border:1px solid var(--line);background:var(--surface);border-radius:11px;padding:11px 12px;width:100%;min-width:0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.empty{border:1.5px dashed var(--line);border-radius:var(--r);padding:18px;color:var(--muted);display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.empty b{color:var(--fg)}
+.notice{display:flex;gap:10px;padding:12px 14px;border-radius:12px;background:var(--accent-soft);font-size:13.5px;align-items:flex-start}
+.notice .ic{stroke:var(--accent);margin-top:1px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.d-ok{background:var(--ok)}.d-warn{background:var(--warn)}.d-bad{background:var(--bad)}.d-none{background:var(--none)}
+.toast{position:absolute;left:50%;transform:translateX(-50%);bottom:16px;background:var(--fg);color:var(--bg);padding:11px 15px;border-radius:12px;font-size:13.5px;z-index:40;width:max-content;max-width:min(92vw,440px);box-shadow:var(--shadow-lg)}
+.seg{display:inline-flex;background:var(--sunk);border-radius:11px;padding:3px;gap:2px}
+.seg button{border:0;background:none;padding:7px 14px;border-radius:9px;font-weight:700;font-size:13.5px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--fg);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+
+/* Listas de trenes (inicio, estación, trayectos) */
+.trains{display:flex;flex-direction:column}
+.tr{display:grid;grid-template-columns:62px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 14px;border:0;border-bottom:1px solid var(--line-2);background:none;text-align:left;width:100%}
+.tr:last-child{border-bottom:0}
+.tr:hover{background:color-mix(in srgb,var(--sunk) 50%,transparent)}
+.tr .time{font-family:var(--f-num);font-variant-numeric:tabular-nums;font-weight:600;font-size:17px;line-height:1.1}
+.tr .time s{display:block;font-size:12px;color:var(--faint);font-weight:500}
+.tr .time.late{color:var(--bad)}.tr .time.mid{color:var(--warn)}
+.tr .what{min-width:0}
+.tr .what b{display:block;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15.5px}
+.tr .what span{display:block;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tr .side{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.tr .side small{font-size:12px;color:var(--muted);font-family:var(--f-num)}
+.tr.gone{opacity:.5}
+
+/* Inicio */
+.hello small{display:block;color:var(--muted);font-weight:600;margin-bottom:4px}
+.route-card{display:flex;flex-direction:column}
+.route-head{display:flex;align-items:center;gap:10px;padding:14px 14px 10px}
+.route-head b{font-size:16.5px;font-weight:800;font-stretch:108%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.route-head .arrow{color:var(--faint)}
+.route-head .x{margin-left:auto;border:0;background:none;color:var(--faint);padding:4px;border-radius:8px}
+.next-hero{margin:0 14px 10px;padding:14px;border-radius:12px;background:var(--accent);color:var(--accent-ink);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:end}
+.next-hero small{grid-column:1/-1;font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.85}
+.next-hero b{font-size:34px;line-height:1;font-weight:800;font-stretch:112%;font-variant-numeric:tabular-nums}
+.next-hero span{font-size:13.5px;opacity:.92}
+.next-hero .in{text-align:right;font-weight:800;font-size:15px}
 
 /* Mapa */
 #v-mapa{overflow:hidden}
@@ -77,53 +146,35 @@ p{margin:0}
 #map.drag{cursor:grabbing}
 .mapbar{position:absolute;top:12px;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:8px;pointer-events:none;z-index:2}
 .mapbar>*{pointer-events:auto}
-.search{display:flex;align-items:center;gap:8px;background:var(--surface);border-radius:12px;box-shadow:var(--shadow);padding:0 12px;max-width:440px}
+.search{display:flex;align-items:center;gap:8px;background:var(--surface);border-radius:13px;box-shadow:var(--shadow);padding:0 12px;max-width:440px}
 .search svg{width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:2;flex:none}
-.search input{border:0;background:none;padding:11px 0;width:100%;outline:none;min-width:0}
-.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;max-width:100%}
-.chips::-webkit-scrollbar{display:none}
-.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;white-space:nowrap;box-shadow:0 1px 2px rgba(0,0,0,.05)}
-.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
-.chip .num{opacity:.7;margin-left:4px;font-size:12px}
-.results{background:var(--surface);border-radius:12px;box-shadow:var(--shadow);max-width:440px;max-height:46vh;overflow:auto}
-.results button{display:flex;gap:10px;align-items:center;width:100%;text-align:left;padding:10px 12px;background:none;border:0;border-bottom:1px solid var(--line)}
+.search input{border:0;background:none;padding:12px 0;width:100%;outline:none;min-width:0}
+.mapbar .chip{box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.results{background:var(--surface);border-radius:13px;box-shadow:var(--shadow-lg);max-width:440px;max-height:50vh;overflow:auto}
+.results button{display:flex;gap:10px;align-items:center;width:100%;text-align:left;padding:11px 12px;background:none;border:0;border-bottom:1px solid var(--line-2)}
 .results button:last-child{border-bottom:0}
-.legend{position:absolute;left:max(12px,env(safe-area-inset-left,0px));bottom:12px;background:var(--surface);border-radius:10px;box-shadow:var(--shadow);padding:8px 10px;font-size:12px;display:flex;gap:10px;flex-wrap:wrap;z-index:2;max-width:calc(100% - 90px)}
+.results .mid{min-width:0}.results .mid b{display:block}.results .mid span{display:block;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.legend{position:absolute;left:max(12px,env(safe-area-inset-left,0px));bottom:12px;background:var(--surface);border-radius:11px;box-shadow:var(--shadow);padding:8px 10px;font-size:12px;display:flex;gap:10px;flex-wrap:wrap;z-index:2;max-width:calc(100% - 92px)}
 .legend span{display:flex;align-items:center;gap:5px;white-space:nowrap}
-.dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
-.d-ok{background:var(--ok)}.d-warn{background:var(--warn)}.d-bad{background:var(--bad)}.d-none{background:var(--none)}
 .mapbtns{position:absolute;right:max(12px,env(safe-area-inset-right,0px));bottom:12px;display:flex;flex-direction:column;gap:8px;z-index:2}
-.mapbtns button{width:44px;height:44px;border-radius:12px;border:0;background:var(--surface);box-shadow:var(--shadow);display:grid;place-items:center}
+.mapbtns button{width:44px;height:44px;border-radius:13px;border:0;background:var(--surface);box-shadow:var(--shadow);display:grid;place-items:center}
 .mapbtns svg{width:20px;height:20px;stroke:var(--fg);fill:none;stroke-width:2;stroke-linecap:round}
-.toast{position:absolute;left:50%;transform:translateX(-50%);bottom:72px;background:var(--fg);color:var(--bg);padding:10px 14px;border-radius:10px;font-size:13.5px;z-index:30;max-width:min(92vw,420px);box-shadow:var(--shadow)}
 
 /* Ficha del tren */
-.sheet{position:absolute;left:0;right:0;bottom:0;max-height:78%;background:var(--surface);border-radius:16px 16px 0 0;box-shadow:0 -10px 30px rgba(0,0,0,.18);z-index:20;display:flex;flex-direction:column;transform:translateY(0);transition:transform .25s ease}
-.sheet[hidden]{display:none!important}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:80%;background:var(--surface);border-radius:20px 20px 0 0;box-shadow:var(--shadow-lg);z-index:20;display:flex;flex-direction:column}
 .sheet .grip{width:40px;height:4px;border-radius:2px;background:var(--line);margin:8px auto 0;flex:none}
+.sheet .body{overflow:auto;padding-block:10px 22px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:14px}
 .sheet .body>*{flex:none}
-.sheet .body{overflow:auto;padding-block:8px 20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:14px}
 .th{display:flex;align-items:flex-start;gap:12px}
-.th .x{margin-left:auto;border:0;background:var(--sunk);width:34px;height:34px;border-radius:50%;flex:none;font-size:18px;line-height:1}
-.prod{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:5px;background:var(--accent-soft);color:var(--accent)}
-.tname{font-size:22px;font-weight:800;font-stretch:115%;line-height:1.15;margin-top:4px;text-wrap:balance}
-.tsub{color:var(--muted);font-size:13.5px;margin-top:2px}
-.delay{display:inline-flex;align-items:center;gap:6px;font-weight:700;padding:5px 10px;border-radius:8px;font-size:14px}
-.delay.ok{background:color-mix(in srgb,var(--ok) 14%,transparent);color:var(--ok)}
-.delay.warn{background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)}
-.delay.bad{background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--bad)}
-.delay.none{background:var(--sunk);color:var(--muted)}
-.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-.facts div{background:var(--surface);padding:9px 10px;min-width:0}
+.th .x{margin-left:auto;border:0;background:var(--sunk);width:34px;height:34px;border-radius:50%;flex:none;display:grid;place-items:center}
+.tname{font-size:22px;font-weight:800;font-stretch:112%;line-height:1.15;margin-top:6px;text-wrap:balance}
+.tsub{color:var(--muted);font-size:13px;margin-top:3px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.facts div{background:var(--surface);padding:10px 11px;min-width:0}
 .facts small{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
 .facts b{display:block;font-size:15px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.row{display:flex;gap:8px;flex-wrap:wrap}
-.btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 14px;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:7px}
-.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-/* Recorrido */
-.route{list-style:none;margin:0;padding:0;position:relative}
-.route li{display:grid;grid-template-columns:52px 18px 1fr auto;align-items:center;gap:8px;padding:6px 0;font-size:14px}
+.route{list-style:none;margin:0;padding:0}
+.route li{display:grid;grid-template-columns:50px 18px minmax(0,1fr) auto;align-items:center;gap:8px;padding:6px 0;font-size:14px}
 .route .t{font-family:var(--f-num);font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px}
 .route .k{position:relative;height:100%;display:grid;place-items:center}
 .route .k::before{content:"";position:absolute;top:-6px;bottom:-6px;width:3px;background:var(--line);left:50%;transform:translateX(-50%)}
@@ -131,108 +182,98 @@ p{margin:0}
 .route li:last-child .k::before{bottom:50%}
 .route .k i{width:11px;height:11px;border-radius:50%;background:var(--surface);border:3px solid var(--line);position:relative;z-index:1}
 .route li.past{color:var(--muted)}
-.route li.past .k::before,.route li.past .k i{border-color:var(--accent);background:var(--accent)}
 .route li.past .k::before{background:var(--accent)}
-.route li.next .k i{border-color:var(--accent);background:var(--surface);width:15px;height:15px;box-shadow:0 0 0 4px var(--accent-soft)}
+.route li.past .k i{border-color:var(--accent);background:var(--accent)}
+.route li.next .k i{border-color:var(--accent);width:15px;height:15px;box-shadow:0 0 0 4px var(--accent-soft)}
 .route li.next b{font-weight:800}
-.route .eta{font-family:var(--f-num);font-variant-numeric:tabular-nums;font-size:13px;font-weight:600}
-.route .here{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
-.hist{display:flex;gap:14px;align-items:center;padding:12px;border-radius:var(--r);background:var(--sunk);font-size:13.5px}
-.bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden;display:flex;flex:1;min-width:80px}
+.route .eta{font-family:var(--f-num);font-size:13px;font-weight:600}
+.route .here{font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-left:6px}
+.hist{display:flex;gap:14px;align-items:center;padding:12px;border-radius:12px;background:var(--sunk);font-size:13.5px}
+.bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden;display:flex;flex:1;min-width:70px}
 .bar i{display:block;height:100%}
 
-/* Formularios y tarjetas */
-.field{display:flex;flex-direction:column;gap:6px}
-.field label{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.02em}
-.input{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:11px 12px;width:100%;min-width:0}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
-.empty{border:1.5px dashed var(--line);border-radius:14px;padding:20px;color:var(--muted);text-align:left;display:flex;flex-direction:column;gap:6px}
-.empty b{color:var(--fg)}
-
-/* Letrero de estación */
-.board{background:var(--board);color:var(--board-fg);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
-.board-head{display:flex;align-items:center;gap:10px;padding:14px 16px 10px;border-bottom:1px solid var(--board-line);flex-wrap:wrap}
-.board-head .st{font-family:var(--f-board);font-weight:800;font-size:26px;letter-spacing:.04em;text-transform:uppercase;line-height:1;min-width:0;overflow-wrap:anywhere}
-.board-head .clock{margin-left:auto;font-family:var(--f-board);font-weight:800;font-size:24px;letter-spacing:.06em}
-.seg{display:flex;gap:0;margin:10px 16px 4px;border:1px solid var(--board-line);border-radius:8px;overflow:hidden;width:max-content}
-.seg button{background:none;border:0;color:var(--board-dim);padding:7px 14px;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
-.seg button[aria-pressed="true"]{background:var(--board-fg);color:var(--board)}
-.tbl-wrap{overflow-x:auto}
-.departures{width:100%;border-collapse:collapse;font-family:var(--f-board);font-weight:800;letter-spacing:.03em;color:var(--board-fg);table-layout:fixed}
-.departures col.c1{width:92px}.departures col.c3{width:112px}
-.departures td:last-child{font-size:14px;letter-spacing:.02em}
-.departures td:first-child{text-overflow:clip}
-.departures th{font-family:var(--f-ui);font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--board-dim);text-align:left;padding:10px 8px 6px;border-bottom:1px solid var(--board-line)}
-.departures td{padding:9px 8px;border-bottom:1px solid var(--board-line);font-size:18px;white-space:nowrap;vertical-align:middle;overflow:hidden;text-overflow:ellipsis}
-.departures td .dest{display:block;font-size:17px}
-.departures th:first-child,.departures td:first-child{padding-left:16px}
-.departures th:last-child,.departures td:last-child{padding-right:16px;text-align:right}
-.departures tr.click{cursor:pointer}
-.departures tr.click:hover td{background:rgba(255,181,61,.06)}
-.departures .dest{text-transform:uppercase;overflow:hidden;text-overflow:ellipsis}
-.departures .tp{display:block;font-size:12.5px;color:var(--board-dim);margin-bottom:1px}
-.departures .late{color:#ff6b5e}
-.departures .ontime{color:#66d98f}
-.departures .sched{color:var(--board-dim)}
-.departures .gone td{opacity:.45}
-.board-foot{padding:10px 16px 14px;font-family:var(--f-ui);font-size:12px;color:var(--board-dim)}
-
-/* Puntualidad */
-.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.kpi{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0}
-.kpi small{font-size:11.5px;color:var(--muted);font-weight:700;letter-spacing:.04em;display:block}
-.kpi b{font-size:26px;font-weight:800;font-stretch:110%;display:block;margin-top:2px}
-.kpi span{font-size:12px;color:var(--muted)}
-.list{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
-.li{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:11px 14px;border-bottom:1px solid var(--line);background:none;border-left:0;border-right:0;border-top:0;text-align:left;width:100%}
-.li:last-child{border-bottom:0}
-.li .tn{font-family:var(--f-num);font-weight:600;font-size:13px;color:var(--muted);width:48px}
-.li .mid{min-width:0}
-.li .mid b{display:block;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.li .mid span{font-size:12.5px;color:var(--muted)}
-.li .r{text-align:right;font-family:var(--f-num);font-variant-numeric:tabular-nums;font-size:13px}
-.li .r b{font-size:15px}
-.seg2{display:flex;gap:6px;flex-wrap:wrap}
+/* Estación */
+.st-head{display:flex;flex-direction:column;gap:12px}
+.st-title{display:flex;align-items:flex-start;gap:10px}
+.st-title h1{min-width:0;overflow-wrap:anywhere}
+.star{margin-left:auto;border:1px solid var(--line);background:var(--surface);width:42px;height:42px;border-radius:12px;display:grid;place-items:center;flex:none}
+.star svg{width:20px;height:20px;stroke:var(--muted);fill:none;stroke-width:2}
+.star[aria-pressed="true"] svg{fill:var(--brand);stroke:var(--brand)}
+.st-meta{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:13px;align-items:center}
+.picker{position:relative}
+.picker .results{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:15;max-width:none}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 
 /* Recoger */
-.big{display:flex;flex-direction:column;gap:4px;padding:18px;border-radius:14px;background:var(--accent);color:var(--accent-ink)}
+.big{display:flex;flex-direction:column;gap:4px;padding:18px;border-radius:16px;background:var(--accent);color:var(--accent-ink)}
 .big small{font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px;opacity:.85}
-.big b{font-size:52px;line-height:1;font-weight:800;font-stretch:115%;font-family:var(--f-ui);font-variant-numeric:tabular-nums}
+.big b{font-size:56px;line-height:1;font-weight:800;font-stretch:112%;font-variant-numeric:tabular-nums}
 .big span{font-size:14.5px;opacity:.92}
-.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.note{font-size:12.5px;color:var(--muted);max-width:68ch}
-.notice{display:flex;gap:10px;padding:12px 14px;border-radius:12px;background:var(--accent-soft);color:var(--fg);font-size:13.5px;align-items:flex-start}
-.notice svg{width:18px;height:18px;stroke:var(--accent);fill:none;stroke-width:2;flex:none;margin-top:1px}
-.alert{border-left:4px solid var(--warn);background:var(--surface);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0}
+.kpi small{font-size:11.5px;color:var(--muted);font-weight:700;display:block}
+.kpi b{font-size:24px;font-weight:800;font-stretch:108%;display:block;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi span{font-size:12px;color:var(--muted)}
+
+/* Tú */
+.setting{display:flex;align-items:center;gap:12px;padding:13px 14px;border-bottom:1px solid var(--line-2)}
+.setting:last-child{border-bottom:0}
+.setting .txt{min-width:0;flex:1}
+.setting .txt b{display:block;font-weight:700}
+.setting .txt span{display:block;font-size:12.5px;color:var(--muted)}
+.setting .input{width:auto;max-width:200px;padding:8px 10px}
+.switch{position:relative;width:46px;height:28px;flex:none}
+.switch input{appearance:none;-webkit-appearance:none;margin:0;width:46px;height:28px;border-radius:999px;background:var(--line);transition:background .2s;cursor:pointer}
+.switch input::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+.switch input:checked{background:var(--accent)}
+.switch input:checked::after{transform:translateX(18px)}
+.list{display:flex;flex-direction:column}
+.li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:11px 14px;border:0;border-bottom:1px solid var(--line-2);background:none;text-align:left;width:100%}
+.li:last-child{border-bottom:0}
+.li .tn{font-family:var(--f-num);font-weight:600;font-size:13px;color:var(--muted);width:48px}
+.li .mid b{display:block;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li .mid span{font-size:12.5px;color:var(--muted)}
+.li .r{text-align:right;font-family:var(--f-num);font-size:13px}
+.li .r b{font-size:15px}
+.alert{border-left:4px solid var(--warn);background:var(--surface);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
 .alert.bad{border-left-color:var(--bad)}
 .alert small{color:var(--muted)}
-.sources{font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+.sources{font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:8px}
 .sources code{font-family:var(--f-num);font-size:12px;background:var(--sunk);padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}
 
+/* Bienvenida */
+.overlay{position:absolute;inset:0;background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:50;display:grid;place-items:center;padding:16px}
+.welcome{background:var(--surface);border-radius:20px;box-shadow:var(--shadow-lg);padding:24px 20px;width:min(440px,100%);display:flex;flex-direction:column;gap:16px;max-height:100%;overflow:auto}
+.welcome .mark{width:52px;height:52px}
+
 @media (min-width:900px){
-  .app{grid-template-columns:92px minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
+  .app{grid-template-columns:96px minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
   .top{grid-column:1/-1}
-  .tabs{grid-row:2;grid-column:1;grid-template-columns:1fr;grid-auto-rows:min-content;border-top:0;border-right:1px solid var(--line);padding-top:10px;gap:4px}
+  .tabs{grid-row:2;grid-column:1;grid-template-columns:1fr;grid-auto-rows:min-content;border-top:0;border-right:1px solid var(--line);padding-top:12px;gap:4px}
   .tabs button{padding:12px 4px}
   .main{grid-row:2;grid-column:2}
-  .sheet{left:auto;right:16px;top:16px;bottom:16px;width:400px;max-height:none;border-radius:16px}
+  .sheet{left:auto;right:16px;top:16px;bottom:16px;width:410px;max-height:none;border-radius:20px}
   .sheet .grip{display:none}
-  .toast{bottom:24px}
 }
-@media (max-width:420px){.facts{grid-template-columns:repeat(2,minmax(0,1fr))}.facts div:first-child{grid-column:1/-1}.brand span{display:none}.departures td{font-size:16px}.departures col.c1{width:86px}.departures col.c3{width:96px}.kpi b{font-size:22px}.big b{font-size:44px}.board-head .st{font-size:21px}}
+@media (max-width:420px){.facts{grid-template-columns:repeat(2,minmax(0,1fr))}.facts div:first-child{grid-column:1/-1}.kpi b{font-size:20px}.big b{font-size:46px}h1{font-size:25px}.tr{grid-template-columns:56px minmax(0,1fr) auto;gap:10px;padding:11px 12px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
 <div class="app">
   <header class="top">
-    <div class="brand"><b>Llegada</b><span>trenes en directo</span></div>
+    <button class="brand" id="brand" aria-label="Ir al inicio">
+      <svg viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="120" fill="var(--accent)"/><path d="M196 392 236 150M316 392 276 150" stroke="var(--accent-ink)" stroke-width="34" stroke-linecap="round"/><circle cx="256" cy="118" r="44" fill="var(--brand)"/></svg>
+      <b>Llegada</b>
+    </button>
     <button class="status" id="status" data-mode="snapshot" title="Origen de los datos"><i></i><span id="status-t">Cargando…</span></button>
   </header>
 
   <main class="main">
+    <!-- INICIO -->
+    <section class="view" id="v-inicio" aria-label="Inicio"><div class="pad" id="home"></div></section>
+
     <!-- MAPA -->
-    <section class="view" id="v-mapa" aria-label="Mapa de trenes">
+    <section class="view" id="v-mapa" hidden aria-label="Mapa de trenes">
       <canvas id="map" aria-label="Mapa con la posición de los trenes"></canvas>
       <div class="mapbar">
         <label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
@@ -240,93 +281,46 @@ p{margin:0}
         <div class="results" id="results" hidden></div>
         <div class="chips" id="filters" role="group" aria-label="Filtrar trenes"></div>
       </div>
-      <div class="legend" aria-hidden="true">
-        <span><i class="dot d-ok"></i>En hora</span><span><i class="dot d-warn"></i>6–15 min</span><span><i class="dot d-bad"></i>+15 min</span>
-      </div>
+      <div class="legend" aria-hidden="true"><span><i class="dot d-ok"></i>En hora</span><span><i class="dot d-warn"></i>6–15 min</span><span><i class="dot d-bad"></i>+15 min</span></div>
       <div class="mapbtns">
-        <button id="b-near" aria-label="Estación más cercana"><svg viewBox="0 0 24 24"><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="1.5"/></svg></button>
+        <button id="b-near" aria-label="Ir a mi ubicación"><svg viewBox="0 0 24 24"><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="1.5"/></svg></button>
         <button id="b-in" aria-label="Acercar"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
         <button id="b-out" aria-label="Alejar"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></button>
         <button id="b-home" aria-label="Ver toda la red"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
       </div>
+      <div class="sheet" id="sheet" hidden role="dialog" aria-label="Detalle del tren"><div class="grip"></div><div class="body" id="sheet-body"></div></div>
     </section>
 
     <!-- ESTACIÓN -->
-    <section class="view" id="v-estacion" hidden aria-label="Panel de estación">
-      <div class="pad">
-        <div class="field">
-          <label for="st-in">Estación</label>
-          <input class="input" id="st-in" list="st-list" placeholder="Escribe una estación" autocomplete="off">
-          <datalist id="st-list"></datalist>
-        </div>
-        <div class="board">
-          <div class="board-head"><div class="st" id="st-name">—</div><div class="clock" id="st-clock">--:--</div></div>
-          <div class="seg" role="group" aria-label="Llegadas o salidas"><button id="seg-sal" aria-pressed="true">Salidas</button><button id="seg-lle" aria-pressed="false">Llegadas</button></div>
-          <div class="tbl-wrap"><table class="departures"><colgroup><col class="c1"><col><col class="c3"></colgroup><thead><tr><th>Hora</th><th id="st-col">Destino</th><th>Estado</th></tr></thead><tbody id="st-rows"></tbody></table></div>
-          <div class="board-foot" id="st-foot"></div>
-        </div>
-      </div>
-    </section>
+    <section class="view" id="v-estacion" hidden aria-label="Estación"><div class="pad" id="station"></div></section>
 
     <!-- RECOGER -->
     <section class="view" id="v-recoger" hidden aria-label="Recoger a alguien">
       <div class="pad">
-        <div><h2>Voy a recoger a alguien</h2><p class="lede">Pon el número de su tren y dónde lo esperas. Llegada calcula a qué hora tienes que salir con el retraso real.</p></div>
+        <div class="sec"><h1>Voy a recoger a alguien</h1><p class="lede">Pon el número de su tren y dónde lo esperas. Te decimos a qué hora salir, con el retraso real, y lo recalculamos solo.</p></div>
         <div class="grid2">
-          <div class="field"><label for="rc-tren">Número de tren</label><input class="input num" id="rc-tren" inputmode="numeric" placeholder="Ej. 02090"></div>
-          <div class="field"><label for="rc-est">Estación de llegada</label><select class="input" id="rc-est"></select></div>
-          <div class="field"><label for="rc-min">Minutos de casa a la estación</label><input class="input num" id="rc-min" type="number" min="0" max="240" value="15"></div>
-          <div class="field"><label for="rc-margen">Margen para aparcar (min)</label><input class="input num" id="rc-margen" type="number" min="0" max="60" value="5"></div>
+          <div class="field"><label for="rc-tren">Número de tren</label><input class="input num" id="rc-tren" inputmode="numeric" placeholder="Viene en el billete, ej. 02090"></div>
+          <div class="field"><label for="rc-est">Estación donde lo esperas</label><select class="input" id="rc-est"></select></div>
+          <div class="field"><label for="rc-min">Minutos hasta la estación</label><input class="input num" id="rc-min" type="number" min="0" max="240"></div>
+          <div class="field"><label for="rc-margen">Margen para aparcar</label><input class="input num" id="rc-margen" type="number" min="0" max="60"></div>
         </div>
-        <div id="rc-out"></div>
+        <div id="rc-out" class="sec"></div>
       </div>
     </section>
 
-    <!-- SEGUIR -->
-    <section class="view" id="v-seguir" hidden aria-label="Mis trenes">
-      <div class="pad">
-        <div><h2>Mis trenes</h2><p class="lede">Los trenes que sigues. Llegada te avisa cuando el retraso pasa del límite que elijas, cuando cambia mucho y cuando llega.</p></div>
-        <div class="card">
-          <div class="grid2">
-            <div class="field"><label for="sg-tren">Añadir tren</label><input class="input num" id="sg-tren" inputmode="numeric" placeholder="Nº de tren"></div>
-            <div class="field"><label for="sg-umbral">Avisar desde (min de retraso)</label><input class="input num" id="sg-umbral" type="number" min="1" max="120" value="10"></div>
-          </div>
-          <div class="row"><button class="btn primary" id="sg-add"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Seguir tren</button><button class="btn" id="sg-notif"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>Activar avisos</button></div>
-          <p class="note" id="sg-notif-st"></p>
-        </div>
-        <div id="sg-list"></div>
-        <div><h3>Últimos avisos</h3></div>
-        <div id="sg-log" class="sources"></div>
-      </div>
-    </section>
+    <!-- TÚ -->
+    <section class="view" id="v-tu" hidden aria-label="Tus ajustes"><div class="pad" id="tu"></div></section>
 
-    <!-- DATOS -->
-    <section class="view" id="v-datos" hidden aria-label="Puntualidad y avisos">
-      <div class="pad">
-        <div><h2>Puntualidad</h2><p class="lede" id="pt-lede"></p></div>
-        <div class="kpis" id="pt-kpis"></div>
-        <div class="grid2">
-          <div class="field"><label for="pt-est">Trenes que pasan por</label><input class="input" id="pt-est" list="st-list" placeholder="Toda la red"></div>
-          <div class="field"><label>Ordenar</label><div class="seg2" id="pt-ord"></div></div>
-        </div>
-        <div class="list" id="pt-list"></div>
-        <div><h2>Avisos de la red</h2></div>
-        <div id="av-list"></div>
-        <div><h2>De dónde salen los datos</h2></div>
-        <div class="sources" id="fuentes"></div>
-      </div>
-    </section>
-
-    <div class="sheet" id="sheet" hidden role="dialog" aria-label="Detalle del tren"><div class="grip"></div><div class="body" id="sheet-body"></div></div>
-    <div class="toast" id="toast" hidden role="status"></div>
+    <div class="toast" id="toast" hidden role="status" aria-live="polite"></div>
+    <div class="overlay" id="welcome" hidden></div>
   </main>
 
   <nav class="tabs" role="tablist" aria-label="Secciones">
-    <button role="tab" data-v="mapa" aria-selected="true"><svg viewBox="0 0 24 24"><path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3z"/><path d="M9 3v15M15 6v15"/></svg>Mapa</button>
-    <button role="tab" data-v="estacion" aria-selected="false"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M7 20h10M12 16v4M7 9h4M7 12h7"/></svg>Estación</button>
+    <button role="tab" data-v="inicio" aria-selected="true"><svg viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>Inicio</button>
+    <button role="tab" data-v="mapa" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3z"/><path d="M9 3v15M15 6v15"/></svg>Mapa</button>
+    <button role="tab" data-v="estacion" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M4 21h16M6 21V9l6-5 6 5v12"/><path d="M10 21v-5h4v5"/></svg>Estación</button>
     <button role="tab" data-v="recoger" aria-selected="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg>Recoger</button>
-    <button role="tab" data-v="seguir" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>Mis trenes</button>
-    <button role="tab" data-v="datos" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Puntualidad</button>
+    <button role="tab" data-v="tu" aria-selected="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Tú</button>
   </nav>
 </div>
 
@@ -349,15 +343,24 @@ const CONFIG = {
 
 /* ============ Utilidades ============ */
 const $ = s => document.querySelector(s);
-const el = (tag, attrs = {}, ...kids) => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === "class") e.className = v; else if (k === "text") e.textContent = v; else if (k.startsWith("on")) e.addEventListener(k.slice(2), v); else if (v !== false && v != null) e.setAttribute(k, v === true ? "" : v); } for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c)); return e; };
-const store = { get(k, d) { try { const v = localStorage.getItem("llegada:" + k); return v == null ? d : JSON.parse(v); } catch { return d; } }, set(k, v) { try { localStorage.setItem("llegada:" + k, JSON.stringify(v)); } catch {} } };
+const el = (tag, attrs = {}, ...kids) => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs || {})) { if (k === "class") e.className = v; else if (k === "text") e.textContent = v; else if (k.startsWith("on")) e.addEventListener(k.slice(2), v); else if (v !== false && v != null) e.setAttribute(k, v === true ? "" : v); } for (const c of kids.flat()) if (c != null && c !== false) e.append(c.nodeType ? c : document.createTextNode(c)); return e; };
+const store = { get(k, d) { try { const v = localStorage.getItem("llegada:" + k); return v == null ? d : JSON.parse(v); } catch { return d; } }, set(k, v) { try { localStorage.setItem("llegada:" + k, JSON.stringify(v)); } catch {} }, clear() { try { Object.keys(localStorage).filter(k => k.startsWith("llegada:")).forEach(k => localStorage.removeItem(k)); } catch {} } };
 const readJSON = id => { try { const t = document.getElementById(id).textContent.trim(); return t.startsWith("/*") ? null : JSON.parse(t); } catch { return null; } };
 const pad2 = n => String(n).padStart(2, "0");
 const hhmm = m => { m = Math.round(m); m = ((m % 1440) + 1440) % 1440; return pad2(Math.floor(m / 60)) + ":" + pad2(m % 60); };
+const dur = m => { m = Math.round(m); if (m < 60) return `${m} min`; return `${Math.floor(m / 60)} h${m % 60 ? " " + pad2(m % 60) : ""}`; };
 const norm = s => (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 const tz = "Europe/Madrid";
 function localParts(date) { const p = new Intl.DateTimeFormat("en-CA", { timeZone: tz, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23" }).formatToParts(date); const o = {}; for (const x of p) o[x.type] = x.value; return { ymd: `${o.year}-${o.month}-${o.day}`, min: +o.hour * 60 + +o.minute + (+o.second) / 60 }; }
-function toast(msg, ms = 3200) { const t = $("#toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(() => t.hidden = true, ms); }
+function toast(msg, ms = 3400) { const t = $("#toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(() => t.hidden = true, ms); }
+const ICONS = {
+  clock: '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/>', bell: '<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>',
+  check: '<path d="M5 12l5 5 9-10"/>', share: '<path d="M12 3v13M7 8l5-5 5 5"/><path d="M5 14v6h14v-6"/>', map: '<path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3z"/>',
+  x: '<path d="M6 6l12 12M18 6 6 18"/>', plus: '<path d="M12 5v14M5 12h14"/>', star: '<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/>',
+  pin: '<path d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>', swap: '<path d="M7 4v16M7 20l-3-3M7 20l3-3M17 20V4M17 4l-3 3M17 4l3 3"/>',
+  info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>', trash: '<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>', route: '<circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.5"/>',
+};
+function icon(k, cls = "ic") { const s = document.createElementNS("http://www.w3.org/2000/svg", "svg"); s.setAttribute("viewBox", "0 0 24 24"); s.setAttribute("class", cls); s.setAttribute("aria-hidden", "true"); s.innerHTML = ICONS[k] || ""; return s; }
 
 /* ============ Datos de referencia ============ */
 const EST = readJSON("data-estaciones") || {};
@@ -365,8 +368,11 @@ let HOR = readJSON("data-horarios") || { fecha: null, trenes: {} };
 const PUNT = readJSON("data-puntualidad") || { trenes: {} };
 const GEO = readJSON("data-geo") || {};
 const SNAP = readJSON("data-instantanea");
-const estNombre = c => (EST[c] && EST[c][0]) || (c ? "Estación " + c : "—");
 const ESTLIST = Object.entries(EST).map(([c, v]) => ({ c, n: v[0], k: norm(v[0]) })).sort((a, b) => a.n.localeCompare(b.n, "es"));
+const CIUDADES = { "60000": "Madrid", "17000": "Madrid Chamartín", "71801": "Barcelona", "03216": "Valencia", "51003": "Sevilla", "54413": "Málaga", "04040": "Zaragoza", "13200": "Bilbao", "31412": "A Coruña", "10600": "Valladolid", "37200": "Ciudad Real", "50500": "Córdoba", "60911": "Alicante", "05000": "Granada", "37606": "Badajoz", "61200": "Murcia", "15100": "León", "70200": "Guadalajara", "92102": "Toledo", "37300": "Puertollano", "22100": "Ourense", "08223": "Vigo", "15410": "Gijón", "15211": "Oviedo", "30100": "Salamanca", "37500": "Mérida", "60600": "Albacete", "11208": "Vitoria", "80100": "Pamplona", "14223": "Santander", "11014": "Burgos", "78400": "Lleida", "79300": "Girona", "71500": "Tarragona", "35400": "Cáceres", "43019": "Huelva", "51405": "Cádiz", "03100": "Jaén", "81100": "Logroño", "60400": "Alcázar de San Juan", "50100": "Manzanares", "50102": "Valdepeñas" };
+const estNombre = c => (EST[c] && EST[c][0]) || (c ? "Estación " + c : "—");
+const corto = c => CIUDADES[c] || (EST[c] ? EST[c][0].replace(/ \(.*$/, "") : "—");
+const findStation = q => { const v = norm(q).trim(); if (!v) return null; return ESTLIST.find(x => x.k === v) || ESTLIST.find(x => x.k.startsWith(v)) || ESTLIST.find(x => x.k.includes(v)) || null; };
 
 const PROD_LIVE = { 2: "AVE", 3: "AVANT", 10: "EUROMED", 11: "ALVIA", 13: "Intercity", 16: "MD", 18: "REGIONAL", 19: "REG.EXP.", 28: "AVLO" };
 const PROD_NOMBRE = { "AVE": "AVE", "AVE INT": "AVE Internacional", "AVLO": "AVLO", "EUROMED": "Euromed", "AVANT": "Avant", "AVANT EXP": "Avant Exprés", "ALVIA": "Alvia", "Intercity": "Intercity", "TRENCELTA": "Trencelta", "MD": "Media Distancia", "REGIONAL": "Regional", "REG.EXP.": "Regional Exprés", "PROXIMDAD": "Proximidad" };
@@ -374,19 +380,31 @@ const PROD_GRUPO = { "AVE": "av", "AVE INT": "av", "AVLO": "av", "EUROMED": "av"
 const SERIE_GRUPO = s => ["100", "102", "103", "106", "112"].includes(s) ? "av" : ["120", "130", "730", "334"].includes(s) ? "ld" : "md";
 const GRUPO_NOMBRE = { av: "Alta velocidad", ld: "Larga distancia", md: "Media distancia" };
 
+/* Red ferroviaria aproximada: unimos paradas consecutivas de todos los trenes del día */
+const RED = [];
+function buildRed() { RED.length = 0; const seen = new Set(), out = RED; for (const h of Object.values(HOR.trenes)) for (let i = 1; i < h.s.length; i++) { const a = h.s[i - 1][0], b = h.s[i][0]; const k = a < b ? a + b : b + a; if (seen.has(k) || !EST[a] || !EST[b]) continue; seen.add(k); out.push([EST[a][2], EST[a][1], EST[b][2], EST[b][1]]); } }
+buildRed();
+
+/* ============ Preferencias del usuario ============ */
+const P = Object.assign({ nombre: "", casa: CONFIG.ESTACION_INICIAL, favs: [], trayectos: [], minutos: 15, margen: 5, umbral: 10, tema: "sistema", cercanias: false, bienvenida: false }, store.get("prefs", {}));
+const saveP = () => store.set("prefs", P);
+function applyTheme() { const r = document.documentElement; if (P.tema === "claro") r.dataset.theme = "light"; else if (P.tema === "oscuro") r.dataset.theme = "dark"; else if (applyTheme.mine) delete r.dataset.theme; applyTheme.mine = P.tema !== "sistema"; }
+applyTheme();
+
 /* ============ Estado ============ */
 const S = {
   mode: "snapshot", updated: null, now: 0, today: null,
-  trains: [], byNum: new Map(),
+  trains: [], byNum: new Map(), cerc: [],
   filter: store.get("filter", "all"), selected: null,
-  station: store.get("station", CONFIG.ESTACION_INICIAL), boardMode: "sal",
-  follow: store.get("follow", []), umbral: store.get("umbral", 10), log: store.get("log", []),
-  avisos: null, ptOrden: "peor", view: "mapa",
+  station: store.get("station", P.casa), boardMode: "sal", destFilter: null,
+  follow: store.get("follow", []), log: store.get("log", []),
+  avisos: null, ptOrden: "peor", view: "inicio", ptEst: "",
 };
 const sev = d => d == null ? "none" : d <= 5 ? "ok" : d <= 15 ? "warn" : "bad";
-const delayText = d => d == null ? "Sin datos" : d <= 0 ? (d < -1 ? `Adelantado ${-d} min` : "En hora") : `+${d} min`;
+const delayText = d => d == null ? "Sin datos" : d <= 0 ? (d < -1 ? `${-d} min antes` : "En hora") : `+${d} min`;
+const prodNombre = t => t.prod ? (PROD_NOMBRE[t.prod] || t.prod) : GRUPO_NOMBRE[t.grupo];
+const isFollowed = n => S.follow.some(f => f.n === n);
 
-/* Combina posición en vivo con el horario del día para saber parada siguiente y horas previstas */
 function enrich(t) {
   const h = HOR.trenes[t.n];
   t.prod = t.prod || (h && h.p) || null;
@@ -395,9 +413,7 @@ function enrich(t) {
   t.o = t.o || (h && h.s[0][0]); t.de = t.de || (h && h.s[h.s.length - 1][0]);
   t.nextIdx = null;
   if (t.stops) {
-    const d = Math.max(0, t.d || 0);
-    let base = S.now;
-    // trenes que cruzan la medianoche
+    const d = Math.max(0, t.d || 0); let base = S.now;
     if (t.stops[0][2] > 1200 && S.now < 400) base += 1440;
     let i = t.stops.findIndex(s => s[1] + d > base);
     if (t.sig) { const j = t.stops.findIndex(s => s[0] === t.sig); if (j >= 0) i = j; }
@@ -405,395 +421,583 @@ function enrich(t) {
   }
   return t;
 }
+/* Estado de un tren en una parada concreta: hora prevista, estimada y si ya pasó */
+function atStop(n, c, kind) {
+  const h = HOR.trenes[n]; if (!h) return null;
+  const i = h.s.findIndex(s => s[0] === c); if (i < 0) return null;
+  const s = h.s[i]; const prog = kind === "sal" ? s[2] : s[1];
+  const live = S.byNum.get(n); const d = live && live.d != null ? Math.max(0, live.d) : null;
+  let passed = false;
+  if (live && live.nextIdx != null) passed = live.nextIdx > i; else if (prog < S.now - 2) passed = true;
+  return { i, prog, d, est: prog + (d || 0), live, passed, h };
+}
 
 /* ============ Fuentes de datos ============ */
 function fromRenfe(json) {
   return (json.trenes || []).map(x => ({
     n: String(x.codComercial).padStart(5, "0"), d: x.ultRetraso == null ? null : parseInt(x.ultRetraso, 10),
     lat: +x.latitud, lon: +x.longitud, prod: PROD_LIVE[x.codProduct] || null,
-    o: x.codOrigen, de: x.codDestino, sig: x.codEstSig || null, mat: x.mat || "", acc: !!x.accesible, cor: x.desCorridor || "",
+    o: x.codOrigen, de: x.codDestino, sig: x.codEstSig || null, mat: x.mat || "", acc: !!x.accesible,
   })).filter(t => isFinite(t.lat) && isFinite(t.lon) && t.lat !== 0 && (t.d == null || (t.d > -60 && t.d < 600)));
+}
+function fromCercanias(json) {
+  const arr = Array.isArray(json) ? json : (json.trenes || json.flota || []);
+  return arr.map(x => ({ n: String(x.codTren || x.tripId || ""), linea: x.codLinea || "", d: x.retrasoMin == null ? null : parseInt(x.retrasoMin, 10), lat: +x.latitud, lon: +x.longitud, de: x.codEstDest ? String(x.codEstDest).padStart(5, "0") : null, nucleo: x.nucleo || "" }))
+    .filter(t => isFinite(t.lat) && isFinite(t.lon) && t.lat !== 0);
 }
 function fromCSV(text) {
   const lines = text.trim().split("\n"); const head = lines[0].split(",");
   const idx = k => head.indexOf(k); const iT = idx("timestamp_utc");
-  const last = lines[lines.length - 1].split(",")[iT];
-  const out = [];
+  const last = lines[lines.length - 1].split(",")[iT]; const out = [];
   for (let i = lines.length - 1; i > 0; i--) { const c = lines[i].split(","); if (c[iT] !== last) break;
-    out.push({ n: c[idx("tren")].padStart(5, "0"), d: parseInt(c[idx("retraso_min")], 10), o: c[idx("origen")], de: c[idx("destino")], lat: +c[idx("latitud")], lon: +c[idx("longitud")], acc: c[idx("accesible")] === "True", mat: c[idx("mat")] }); }
+    out.push({ n: c[idx("tren")].padStart(5, "0"), d: parseInt(c[idx("retraso_min")], 10), o: c[idx("origen")].padStart(5, "0"), de: c[idx("destino")].padStart(5, "0"), lat: +c[idx("latitud")], lon: +c[idx("longitud")], acc: c[idx("accesible")] === "True", mat: c[idx("mat")] }); }
   return { ts: last, trenes: out.filter(t => isFinite(t.lat) && t.d > -60 && t.d < 600) };
 }
-async function getJSON(url, ms = 9000) { const c = new AbortController(); const t = setTimeout(() => c.abort(), ms); try { const r = await fetch(url, { signal: c.signal, cache: "no-store" }); if (!r.ok) throw new Error(r.status); return await r.json(); } finally { clearTimeout(t); } }
-async function getText(url, ms = 9000) { const c = new AbortController(); const t = setTimeout(() => c.abort(), ms); try { const r = await fetch(url, { signal: c.signal, cache: "no-store" }); if (!r.ok) throw new Error(r.status); return await r.text(); } finally { clearTimeout(t); } }
+async function fetchT(url, ms = 9000) { const c = new AbortController(); const t = setTimeout(() => c.abort(), ms); try { const r = await fetch(url, { signal: c.signal, cache: "no-store" }); if (!r.ok) throw new Error(r.status); return r; } finally { clearTimeout(t); } }
 const hasAPI = () => CONFIG.API && !CONFIG.API.startsWith("/*");
-
 async function ensureHorarios(ymd) {
   if (HOR.fecha === ymd) return;
-  for (const url of [(hasAPI() ? CONFIG.API + "/horarios?fecha=" + ymd : null), "data/horarios-" + ymd + ".json"].filter(Boolean)) {
-    try { const h = await getJSON(url); if (h && h.trenes) { HOR = h; return; } } catch {}
-  }
+  try { const h = await (await fetchT("data/horarios-" + ymd + ".json")).json(); if (h && h.trenes) { HOR = h; buildRed(); } } catch {}
 }
 
+let prevPos = new Map(), animStart = 0;
 async function refresh() {
   let trenes = null, when = null, mode = "snapshot";
   const real = localParts(new Date());
-  if (hasAPI()) {
-    try { const j = await getJSON(CONFIG.API + "/flota"); trenes = fromRenfe(j); when = new Date(); mode = "live"; } catch {}
-  }
+  if (hasAPI()) { try { trenes = fromRenfe(await (await fetchT(CONFIG.API + "/flota")).json()); when = new Date(); mode = "live"; } catch {} }
   if (!trenes && CONFIG.ESPEJO) {
-    try { const [y, m] = real.ymd.split("-"); const csv = fromCSV(await getText(`${CONFIG.ESPEJO}${y}/${m}/flota-${real.ymd}.csv`));
+    try { const [y, m] = real.ymd.split("-"); const csv = fromCSV(await (await fetchT(`${CONFIG.ESPEJO}${y}/${m}/flota-${real.ymd}.csv`)).text());
       if (csv.trenes.length) { trenes = csv.trenes; when = new Date(csv.ts); mode = "mirror"; } } catch {}
   }
   if (!trenes && SNAP) { trenes = SNAP.trenes.map(a => ({ n: a[0], d: a[1], lat: a[2], lon: a[3], mat: a[4], o: a[5], de: a[6], acc: !!a[7] })); when = new Date(SNAP.ts); mode = "snapshot"; }
-  if (!trenes) return;
+  if (!trenes) { renderStatus(); return; }
   const lp = localParts(mode === "snapshot" ? when : new Date());
   if (mode !== "snapshot") await ensureHorarios(lp.ymd);
+  prevPos = new Map(S.trains.map(t => [t.n, [t.lon, t.lat]]));
   S.mode = mode; S.updated = when; S.now = lp.min; S.today = lp.ymd;
   S.trains = trenes.map(enrich); S.byNum = new Map(S.trains.map(t => [t.n, t]));
-  renderStatus(); renderFilters(); draw(); checkFollows();
-  if (S.selected) openTrain(S.selected, true);
-  renderView();
+  for (const t of S.trains) { const p = prevPos.get(t.n); t.from = p || [t.lon, t.lat]; }
+  animStart = performance.now(); animate();
+  if (mode === "live" && P.cercanias) loadCercanias();
+  renderStatus(); renderFilters(); checkFollows();
+  if (S.selected && S.view === "mapa") openTrain(S.selected, true);
+  renderView(true);
   if (mode === "live") loadAvisos();
 }
+async function loadCercanias() { try { S.cerc = fromCercanias(await (await fetchT(CONFIG.API + "/cercanias")).json()); draw(); renderFilters(); } catch { S.cerc = []; } }
 
 /* ============ Barra de estado ============ */
 function renderStatus() {
   const b = $("#status"); b.dataset.mode = S.mode;
   const h = S.updated ? hhmm(localParts(S.updated).min) : "--:--";
-  $("#status-t").textContent = S.mode === "live" ? `En directo · ${h}` : S.mode === "mirror" ? `Retraso ~30 min · ${h}` : `Instantánea de las ${h}`;
+  const ago = S.updated ? Math.max(0, Math.round((Date.now() - S.updated) / 60000)) : 0;
+  $("#status-t").textContent = S.mode === "live" ? `En directo` : S.mode === "mirror" ? `Datos de hace ${ago} min` : `Foto de las ${h}`;
+  b.title = S.mode === "live" ? `Actualizado a las ${hhmm(localParts(S.updated).min)}` : S.mode === "mirror" ? `Posiciones de las ${h}. Conecta el servidor para verlas en directo.` : `Posiciones reales de las ${h}. No se mueven sin conexión.`;
 }
-$("#status").addEventListener("click", () => { show("datos"); setTimeout(() => $("#fuentes").scrollIntoView({ behavior: "smooth" }), 50); });
+$("#status").addEventListener("click", () => { show("tu"); setTimeout(() => { const f = $("#fuentes"); if (f) f.scrollIntoView({ behavior: "smooth" }); }, 60); });
+$("#brand").addEventListener("click", () => show("inicio"));
 
 /* ============ Mapa (canvas propio, sin teselas) ============ */
 const cv = $("#map"), ctx = cv.getContext("2d");
 const K = Math.cos(40 * Math.PI / 180);
-const V = { x: 0, y: 0, k: 1 }; // transformación de la vista
-let W = 0, H = 0, DPR = 1, colors = {};
+const V = { x: 0, y: 0, k: 1 };
+let W = 0, H = 0, DPR = 1, colors = {}, FONT = "system-ui";
 const proj = (lon, lat) => [(lon + 3.7) * K * V.k + V.x, -(lat - 40.2) * V.k + V.y];
-const unproj = (x, y) => [((x - V.x) / V.k) / K - 3.7, -((y - V.y) / V.k) + 40.2];
-function readColors() { const cs = getComputedStyle(document.documentElement); for (const k of ["land", "land-2", "sea", "coast", "station", "ok", "warn", "bad", "none", "fg", "bg", "surface", "accent", "muted"]) colors[k] = cs.getPropertyValue("--" + k).trim(); }
-function fitHome() { const w = 10.5 * K, h = 9.2; V.k = Math.min(W / w, (H - 110) / h) * 0.95; V.x = W / 2 - (-0.1) * K * V.k; V.y = (H + 60) / 2 + 0.0 * V.k; }
-function resize() { const r = cv.getBoundingClientRect(); if (!r.width) return; const first = !W; DPR = Math.min(window.devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * DPR; cv.height = H * DPR; if (first) fitHome(); draw(); }
-const CIUDADES = { "60000": "Madrid", "71801": "Barcelona", "03216": "Valencia", "51003": "Sevilla", "54413": "Málaga", "04040": "Zaragoza", "13200": "Bilbao", "31412": "A Coruña", "10600": "Valladolid", "37200": "Ciudad Real", "50500": "Córdoba", "60911": "Alicante", "05000": "Granada", "37606": "Badajoz", "61200": "Murcia", "15100": "León", "70200": "Guadalajara", "92102": "Toledo", "37300": "Puertollano", "22100": "Ourense", "08223": "Vigo", "15410": "Gijón", "15211": "Oviedo", "30100": "Salamanca", "37500": "Mérida", "60600": "Albacete", "11208": "Vitoria", "80100": "Pamplona", "14223": "Santander", "11014": "Burgos", "78400": "Lleida", "79300": "Girona", "71500": "Tarragona", "35400": "Cáceres", "43019": "Huelva", "51405": "Cádiz", "03100": "Jaén", "81100": "Logroño" };
-const corto = c => CIUDADES[c] || EST[c][0].replace(/ \(.*$/, "");
+function readColors() { const cs = getComputedStyle(document.documentElement); for (const k of ["land", "land-2", "sea", "coast", "rail", "station", "ok", "warn", "bad", "none", "fg", "bg", "surface", "accent", "muted", "brand"]) colors[k] = cs.getPropertyValue("--" + k).trim(); FONT = getComputedStyle(document.body).fontFamily; }
+function fitHome() { const w = 10.5 * K, h = 9.2; V.k = Math.min(W / w, (H - 110) / h) * 0.95; V.x = W / 2 - (-0.1) * K * V.k; V.y = (H + 60) / 2; }
+function resize() { const r = cv.getBoundingClientRect(); if (!r.width) return; const first = !W; DPR = Math.min(window.devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * DPR; cv.height = H * DPR; if (first) { fitHome(); if (store.get("view")) Object.assign(V, store.get("view")); } draw(); }
 function visible(t) {
   if (S.filter === "all") return true;
   if (S.filter === "late") return t.d != null && t.d > 5;
-  if (S.filter === "follow") return S.follow.some(f => f.n === t.n);
+  if (S.filter === "follow") return isFollowed(t.n);
+  if (S.filter === "cerc") return false;
   return t.grupo === S.filter;
 }
+let ease = 1;
+function animate() { const p = Math.min(1, (performance.now() - animStart) / 900); ease = 1 - Math.pow(1 - p, 3); draw(); if (p < 1 && S.view === "mapa") requestAnimationFrame(animate); else ease = 1; }
+const posOf = t => [t.from[0] + (t.lon - t.from[0]) * ease, t.from[1] + (t.lat - t.from[1]) * ease];
 function poly(ring) { ctx.beginPath(); for (let i = 0; i < ring.length; i += 2) { const [x, y] = proj(ring[i], ring[i + 1]); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); } ctx.closePath(); }
 function draw() {
-  if (!W) return;
+  if (!W || S.view !== "mapa") return;
   ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
   ctx.fillStyle = colors.sea; ctx.fillRect(0, 0, W, H);
-  ctx.lineJoin = "round";
-  for (const k of ["fr", "ad", "ma", "pt"]) for (const r of (GEO[k] || [])) { poly(r); ctx.fillStyle = colors["land-2"]; ctx.fill(); ctx.strokeStyle = colors.coast; ctx.lineWidth = 0.8; ctx.stroke(); }
+  ctx.lineJoin = "round"; ctx.lineCap = "round";
+  for (const k of ["fr", "ad", "ma", "pt"]) for (const r of (GEO[k] || [])) { poly(r); ctx.fillStyle = colors["land-2"]; ctx.fill(); ctx.strokeStyle = colors.coast; ctx.lineWidth = .8; ctx.stroke(); }
   for (const r of (GEO.es || [])) { poly(r); ctx.fillStyle = colors.land; ctx.fill(); ctx.strokeStyle = colors.coast; ctx.lineWidth = 1.1; ctx.stroke(); }
+  // vías
+  ctx.beginPath(); for (const [a, b, c, d] of RED) { const [x1, y1] = proj(a, b), [x2, y2] = proj(c, d); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); }
+  ctx.strokeStyle = colors.rail; ctx.lineWidth = V.k > 250 ? 2 : 1.3; ctx.stroke();
   // recorrido del tren seleccionado
   const sel = S.selected && S.byNum.get(S.selected);
-  if (sel && sel.stops) {
+  const selStops = sel ? sel.stops : (S.selected && HOR.trenes[S.selected] ? HOR.trenes[S.selected].s : null);
+  if (selStops) {
     ctx.beginPath(); let first = true;
-    for (const s of sel.stops) { const e = EST[s[0]]; if (!e) continue; const [x, y] = proj(e[2], e[1]); first ? ctx.moveTo(x, y) : ctx.lineTo(x, y); first = false; }
-    ctx.strokeStyle = colors.accent; ctx.globalAlpha = .55; ctx.lineWidth = 3; ctx.setLineDash([2, 5]); ctx.lineCap = "round"; ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
-    for (const s of sel.stops) { const e = EST[s[0]]; if (!e) continue; const [x, y] = proj(e[2], e[1]); ctx.beginPath(); ctx.arc(x, y, 3.5, 0, 7); ctx.fillStyle = colors.surface; ctx.fill(); ctx.strokeStyle = colors.accent; ctx.lineWidth = 2; ctx.stroke(); }
+    for (const s of selStops) { const e = EST[s[0]]; if (!e) continue; const [x, y] = proj(e[2], e[1]); first ? ctx.moveTo(x, y) : ctx.lineTo(x, y); first = false; }
+    ctx.strokeStyle = colors.accent; ctx.lineWidth = 3.5; ctx.globalAlpha = .7; ctx.stroke(); ctx.globalAlpha = 1;
+    for (const s of selStops) { const e = EST[s[0]]; if (!e) continue; const [x, y] = proj(e[2], e[1]); ctx.beginPath(); ctx.arc(x, y, 3.5, 0, 7); ctx.fillStyle = colors.surface; ctx.fill(); ctx.strokeStyle = colors.accent; ctx.lineWidth = 2; ctx.stroke(); }
   }
   // estaciones
-  const rs = V.k > 160 ? 2 : 1.2;
-  ctx.fillStyle = colors.station;
-  for (const c in EST) { const e = EST[c]; const [x, y] = proj(e[2], e[1]); if (x < -5 || y < -5 || x > W + 5 || y > H + 5) continue; ctx.fillRect(x - rs / 2, y - rs / 2, rs, rs); }
-  // ciudades
-  ctx.font = `600 ${V.k > 200 ? 12 : 11}px ${getComputedStyle(document.body).fontFamily}`;
-  ctx.textBaseline = "middle";
+  if (V.k > 120) { const rs = V.k > 300 ? 2.4 : 1.6; ctx.fillStyle = colors.station; for (const c in EST) { const e = EST[c]; const [x, y] = proj(e[2], e[1]); if (x < -5 || y < -5 || x > W + 5 || y > H + 5) continue; ctx.beginPath(); ctx.arc(x, y, rs, 0, 7); ctx.fill(); } }
+  // casa y favoritas
+  for (const c of new Set([P.casa, ...P.favs])) { const e = EST[c]; if (!e) continue; const [x, y] = proj(e[2], e[1]); ctx.beginPath(); ctx.arc(x, y, 5, 0, 7); ctx.fillStyle = colors.brand; ctx.fill(); ctx.strokeStyle = colors.surface; ctx.lineWidth = 2; ctx.stroke(); }
+  // nombres
+  ctx.font = `600 ${V.k > 200 ? 12 : 11}px ${FONT}`; ctx.textBaseline = "middle";
   const list = V.k > 320 ? Object.keys(EST).filter(c => { const e = EST[c]; const [x, y] = proj(e[2], e[1]); return x > 0 && y > 0 && x < W && y < H; }) : Object.keys(CIUDADES);
-  const boxes = []; // evita que las etiquetas se pisen
-  list.sort((a, b) => (b in CIUDADES) - (a in CIUDADES));
+  list.sort((a, b) => ((b === P.casa) - (a === P.casa)) || ((b in CIUDADES) - (a in CIUDADES)));
+  const boxes = [];
   for (const c of list) { const e = EST[c]; if (!e) continue; const [x, y] = proj(e[2], e[1]); const name = corto(c); const w = ctx.measureText(name).width;
     const bx = [x + 4, y - 8, x + 10 + w, y + 8]; if (boxes.some(o => bx[0] < o[2] && bx[2] > o[0] && bx[1] < o[3] && bx[3] > o[1])) continue; boxes.push(bx);
-    ctx.lineWidth = 3; ctx.strokeStyle = colors.land; ctx.strokeText(name, x + 6, y); ctx.fillStyle = colors.muted; ctx.fillText(name, x + 6, y); }
+    ctx.lineWidth = 3.5; ctx.strokeStyle = colors.land; ctx.strokeText(name, x + 7, y); ctx.fillStyle = c === P.casa ? colors.fg : colors.muted; ctx.fillText(name, x + 7, y); }
+  // cercanías
+  if (S.cerc.length && (S.filter === "all" || S.filter === "cerc")) { const s = V.k > 250 ? 6 : 4; for (const t of S.cerc) { const [x, y] = proj(t.lon, t.lat); if (x < -10 || y < -10 || x > W + 10 || y > H + 10) continue; ctx.fillStyle = colors[sev(t.d)]; ctx.fillRect(x - s / 2, y - s / 2, s, s); } }
   // trenes
   const r = V.k > 250 ? 7 : V.k > 120 ? 5.5 : 4.5;
   const order = S.trains.filter(visible).sort((a, b) => (a.d || 0) - (b.d || 0));
   for (const t of order) {
-    const [x, y] = proj(t.lon, t.lat); if (x < -10 || y < -10 || x > W + 10 || y > H + 10) continue;
-    const followed = S.follow.some(f => f.n === t.n);
-    if (followed) { ctx.beginPath(); ctx.arc(x, y, r + 5, 0, 7); ctx.strokeStyle = colors.accent; ctx.lineWidth = 2; ctx.stroke(); }
-    ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fillStyle = colors[sev(t.d)]; ctx.fill(); ctx.lineWidth = 1.5; ctx.strokeStyle = colors.surface; ctx.stroke();
+    const [x, y] = proj(...posOf(t)); if (x < -10 || y < -10 || x > W + 10 || y > H + 10) continue;
+    if (isFollowed(t.n)) { ctx.beginPath(); ctx.arc(x, y, r + 5, 0, 7); ctx.strokeStyle = colors.accent; ctx.lineWidth = 2; ctx.stroke(); }
+    ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fillStyle = colors[sev(t.d)]; ctx.fill(); ctx.lineWidth = 1.6; ctx.strokeStyle = colors.surface; ctx.stroke();
   }
-  if (sel) { const [x, y] = proj(sel.lon, sel.lat); ctx.beginPath(); ctx.arc(x, y, r + 7, 0, 7); ctx.strokeStyle = colors.fg; ctx.lineWidth = 2.5; ctx.stroke();
-    if (V.k > 90) { const lab = sel.n; ctx.font = `700 12px ${getComputedStyle(document.body).fontFamily}`; const w = ctx.measureText(lab).width + 12; ctx.fillStyle = colors.fg; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(x - w / 2, y - r - 30, w, 20, 5) : ctx.rect(x - w / 2, y - r - 30, w, 20); ctx.fill(); ctx.fillStyle = colors.bg; ctx.textAlign = "center"; ctx.fillText(lab, x, y - r - 20); ctx.textAlign = "left"; } }
+  if (sel) { const [x, y] = proj(...posOf(sel)); ctx.beginPath(); ctx.arc(x, y, r + 7, 0, 7); ctx.strokeStyle = colors.fg; ctx.lineWidth = 2.5; ctx.stroke();
+    const lab = `${prodNombre(sel)} ${sel.n}`; ctx.font = `700 12px ${FONT}`; const w = ctx.measureText(lab).width + 14; ctx.fillStyle = colors.fg; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(x - w / 2, y - r - 32, w, 22, 6) : ctx.rect(x - w / 2, y - r - 32, w, 22); ctx.fill(); ctx.fillStyle = colors.bg; ctx.textAlign = "center"; ctx.fillText(lab, x, y - r - 21); ctx.textAlign = "left"; }
 }
-// gestos: arrastrar, pellizcar, rueda, doble toque
 const ptrs = new Map(); let moved = 0, pinch0 = null;
 cv.addEventListener("pointerdown", e => { cv.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, [e.offsetX, e.offsetY]); moved = 0; if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch0 = { d: Math.hypot(a[0] - b[0], a[1] - b[1]), k: V.k, cx: (a[0] + b[0]) / 2, cy: (a[1] + b[1]) / 2, x: V.x, y: V.y }; } cv.classList.add("drag"); });
 cv.addEventListener("pointermove", e => { if (!ptrs.has(e.pointerId)) return; const p = ptrs.get(e.pointerId); const dx = e.offsetX - p[0], dy = e.offsetY - p[1]; ptrs.set(e.pointerId, [e.offsetX, e.offsetY]);
   if (ptrs.size === 2 && pinch0) { const [a, b] = [...ptrs.values()]; const d = Math.hypot(a[0] - b[0], a[1] - b[1]); const k = Math.max(40, Math.min(3000, pinch0.k * d / pinch0.d)); const cx = (a[0] + b[0]) / 2, cy = (a[1] + b[1]) / 2; V.x = cx - (pinch0.cx - pinch0.x) * k / pinch0.k; V.y = cy - (pinch0.cy - pinch0.y) * k / pinch0.k; V.k = k; moved += 10; }
   else if (ptrs.size === 1) { V.x += dx; V.y += dy; moved += Math.abs(dx) + Math.abs(dy); }
   draw(); });
-const up = e => { ptrs.delete(e.pointerId); if (ptrs.size < 2) pinch0 = null; if (!ptrs.size) cv.classList.remove("drag"); if (e.type === "pointerup" && moved < 6 && !ptrs.size) tap(e.offsetX, e.offsetY); };
+const up = e => { ptrs.delete(e.pointerId); if (ptrs.size < 2) pinch0 = null; if (!ptrs.size) { cv.classList.remove("drag"); saveView(); } if (e.type === "pointerup" && moved < 6 && !ptrs.size) tap(e.offsetX, e.offsetY); };
 cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
 cv.addEventListener("wheel", e => { e.preventDefault(); zoomAt(e.offsetX, e.offsetY, Math.exp(-e.deltaY * 0.0015)); }, { passive: false });
 cv.addEventListener("dblclick", e => zoomAt(e.offsetX, e.offsetY, 2));
-function zoomAt(x, y, f) { const k = Math.max(40, Math.min(3000, V.k * f)); f = k / V.k; V.x = x - (x - V.x) * f; V.y = y - (y - V.y) * f; V.k = k; draw(); }
-function centerOn(lon, lat, k) { if (k) V.k = Math.max(V.k, k); const [x, y] = proj(lon, lat); const sheetOpen = !$("#sheet").hidden && innerWidth < 900; V.x += W / 2 - x; V.y += (sheetOpen ? H * 0.28 : H / 2) - y; draw(); }
-function tap(x, y) { let best = null, bd = 22; for (const t of S.trains) { if (!visible(t)) continue; const [tx, ty] = proj(t.lon, t.lat); const d = Math.hypot(tx - x, ty - y); if (d < bd) { bd = d; best = t; } } if (best) openTrain(best.n); else closeSheet(); }
-$("#b-in").onclick = () => zoomAt(W / 2, H / 2, 1.6); $("#b-out").onclick = () => zoomAt(W / 2, H / 2, 1 / 1.6); $("#b-home").onclick = () => { fitHome(); draw(); };
-$("#b-near").onclick = () => {
-  if (!navigator.geolocation) return toast("Este navegador no da la ubicación. Busca tu estación por nombre.");
-  navigator.geolocation.getCurrentPosition(p => { const { latitude: la, longitude: lo } = p.coords; let best = null, bd = 1e9; for (const c in EST) { const e = EST[c]; const d = (e[1] - la) ** 2 + ((e[2] - lo) * K) ** 2; if (d < bd) { bd = d; best = c; } }
-    if (best) { setStation(best); centerOn(lo, la, 300); toast(`Estación más cercana: ${estNombre(best)}`); } }, () => toast("No se ha podido obtener tu ubicación. Busca tu estación por nombre."), { timeout: 8000 });
-};
+const saveView = () => { clearTimeout(saveView._t); saveView._t = setTimeout(() => store.set("view", { x: V.x, y: V.y, k: V.k }), 400); };
+function zoomAt(x, y, f) { const k = Math.max(40, Math.min(3000, V.k * f)); f = k / V.k; V.x = x - (x - V.x) * f; V.y = y - (y - V.y) * f; V.k = k; draw(); saveView(); }
+function centerOn(lon, lat, k) { if (k) V.k = Math.max(V.k, k); const [x, y] = proj(lon, lat); const sheetOpen = !$("#sheet").hidden && innerWidth < 900; V.x += (innerWidth >= 900 && !$("#sheet").hidden ? (W - 420) / 2 : W / 2) - x; V.y += (sheetOpen ? H * 0.26 : H / 2) - y; draw(); saveView(); }
+function tap(x, y) {
+  let best = null, bd = 22;
+  for (const t of S.trains) { if (!visible(t)) continue; const [tx, ty] = proj(t.lon, t.lat); const d = Math.hypot(tx - x, ty - y); if (d < bd) { bd = d; best = t; } }
+  if (best) return openTrain(best.n);
+  if (S.cerc.length && (S.filter === "all" || S.filter === "cerc")) { let cb = null, cd = 16; for (const t of S.cerc) { const [tx, ty] = proj(t.lon, t.lat); const d = Math.hypot(tx - x, ty - y); if (d < cd) { cd = d; cb = t; } } if (cb) return openCercanias(cb); }
+  closeSheet();
+}
+$("#b-in").onclick = () => zoomAt(W / 2, H / 2, 1.6); $("#b-out").onclick = () => zoomAt(W / 2, H / 2, 1 / 1.6); $("#b-home").onclick = () => { fitHome(); draw(); saveView(); };
+function nearest(la, lo) { let best = null, bd = 1e9; for (const c in EST) { const e = EST[c]; const d = (e[1] - la) ** 2 + ((e[2] - lo) * K) ** 2; if (d < bd) { bd = d; best = c; } } return best; }
+function locate(cb) {
+  if (!navigator.geolocation) { toast("Este navegador no da la ubicación. Escribe tu estación."); return; }
+  navigator.geolocation.getCurrentPosition(p => cb(p.coords.latitude, p.coords.longitude), () => toast("No hemos podido saber dónde estás. Escribe tu estación."), { timeout: 8000, maximumAge: 60000 });
+}
+$("#b-near").onclick = () => locate((la, lo) => { centerOn(lo, la, 320); const c = nearest(la, lo); toast(`Estación más cercana: ${estNombre(c)}`); });
 new ResizeObserver(resize).observe(cv);
 readColors();
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { readColors(); draw(); });
 new MutationObserver(() => { readColors(); draw(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+if (document.fonts) document.fonts.ready.then(() => { readColors(); draw(); });
 
 /* ============ Filtros y búsqueda ============ */
 function renderFilters() {
   const f = $("#filters"); f.textContent = "";
-  const n = k => S.trains.filter(t => k === "all" || (k === "late" ? t.d > 5 : k === "follow" ? S.follow.some(x => x.n === t.n) : t.grupo === k)).length;
-  for (const [k, lab] of [["all", "Todos"], ["late", "Con retraso"], ["av", "Alta velocidad"], ["ld", "Larga distancia"], ["md", "Media distancia"], ["follow", "Mis trenes"]]) {
-    if (k === "follow" && !S.follow.length) continue;
+  const n = k => k === "cerc" ? S.cerc.length : S.trains.filter(t => k === "all" || (k === "late" ? t.d > 5 : k === "follow" ? isFollowed(t.n) : t.grupo === k)).length;
+  for (const [k, lab] of [["all", "Todos"], ["late", "Con retraso"], ["follow", "Mis trenes"], ["av", "Alta velocidad"], ["ld", "Larga distancia"], ["md", "Media distancia"], ["cerc", "Cercanías"]]) {
+    if (k === "follow" && !S.follow.length) continue; if (k === "cerc" && !S.cerc.length) continue;
     f.append(el("button", { class: "chip", "aria-pressed": S.filter === k ? "true" : "false", onclick: () => { S.filter = k; store.set("filter", k); renderFilters(); draw(); } }, lab, el("span", { class: "num", text: n(k) })));
   }
 }
 $("#q").addEventListener("input", () => {
   const q = norm($("#q").value.trim()); const box = $("#results"); box.textContent = "";
   if (!q) { box.hidden = true; return; }
-  const items = [];
-  for (const t of S.trains) if (t.n.includes(q.replace(/^0+/, "")) || norm(estNombre(t.de)).includes(q) || norm(estNombre(t.o)).includes(q)) items.push(["t", t]);
-  const st = ESTLIST.filter(s => s.k.includes(q)).slice(0, 5);
-  for (const t of items.slice(0, 8)) { const x = t[1]; box.append(el("button", { onclick: () => { box.hidden = true; $("#q").value = ""; openTrain(x.n); } }, el("i", { class: "dot d-" + sev(x.d) }), el("span", {}, el("b", { class: "num", text: x.n }), ` ${prodNombre(x)} · ${estNombre(x.o)} → ${estNombre(x.de)}`))); }
-  for (const s of st) box.append(el("button", { onclick: () => { box.hidden = true; $("#q").value = ""; const e = EST[s.c]; centerOn(e[2], e[1], 260); setStation(s.c); } }, el("span", { class: "prod", text: "Estación" }), el("span", {}, el("b", { text: s.n }), " · ver en el mapa")));
-  if (!box.childNodes.length) box.append(el("div", { class: "note", style: "padding:12px", text: "Ningún tren en circulación ni estación con ese nombre." }));
+  const qn = q.replace(/^0+/, "");
+  const items = S.trains.filter(t => (qn && t.n.replace(/^0+/, "").startsWith(qn)) || norm(estNombre(t.de)).includes(q) || norm(estNombre(t.o)).includes(q)).slice(0, 8);
+  for (const x of items) box.append(el("button", { onclick: () => { box.hidden = true; $("#q").value = ""; openTrain(x.n); } }, el("i", { class: "dot d-" + sev(x.d) }), el("span", { class: "mid" }, el("b", {}, `${prodNombre(x)} `, el("span", { class: "num", style: "display:inline;color:var(--muted)", text: x.n })), el("span", { text: `${corto(x.o)} → ${corto(x.de)} · ${delayText(x.d)}` }))));
+  if (/^\d{3,5}$/.test(qn) && !items.length && HOR.trenes[qn.padStart(5, "0")]) { const n = qn.padStart(5, "0"), h = HOR.trenes[n]; box.append(el("button", { onclick: () => { box.hidden = true; $("#q").value = ""; openTrain(n); } }, el("i", { class: "dot d-none" }), el("span", { class: "mid" }, el("b", {}, `${PROD_NOMBRE[h.p] || h.p} ${n}`), el("span", { text: `${corto(h.s[0][0])} → ${corto(h.s[h.s.length - 1][0])} · sale a las ${hhmm(h.s[0][2])}` })))); }
+  for (const s of ESTLIST.filter(s => s.k.includes(q)).slice(0, 5)) box.append(el("button", { onclick: () => { box.hidden = true; $("#q").value = ""; const e = EST[s.c]; centerOn(e[2], e[1], 300); } }, icon("pin"), el("span", { class: "mid" }, el("b", { text: s.n }), el("span", { text: "Ver en el mapa" })), el("button", { class: "link", onclick: ev => { ev.stopPropagation(); box.hidden = true; $("#q").value = ""; setStation(s.c); show("estacion"); }, text: "Salidas" })));
+  if (!box.childNodes.length) box.append(el("div", { class: "muted", style: "padding:12px", text: "No hay ningún tren en circulación ni estación con ese nombre." }));
   box.hidden = false;
 });
 
 /* ============ Ficha del tren ============ */
-const prodNombre = t => t.prod ? (PROD_NOMBRE[t.prod] || t.prod) : GRUPO_NOMBRE[t.grupo];
-function etaAt(t, idx) { const s = t.stops[idx]; return s[1] + Math.max(0, t.d || 0); }
 function openTrain(n, silent) {
-  const t = S.byNum.get(n);
-  const sh = $("#sheet"), b = $("#sheet-body"); b.textContent = "";
-  S.selected = n;
-  if (!t) { // no circula ahora: mostramos su horario
-    const h = HOR.trenes[n];
-    b.append(el("div", { class: "th" }, el("div", {}, el("span", { class: "prod", text: h ? (PROD_NOMBRE[h.p] || h.p) : "Tren" }), el("div", { class: "tname", text: h ? `${estNombre(h.s[0][0])} → ${estNombre(h.s[h.s.length - 1][0])}` : `Tren ${n}` }), el("div", { class: "tsub num", text: `Tren ${n}` })), el("button", { class: "x", "aria-label": "Cerrar", onclick: closeSheet, text: "×" })));
-    b.append(el("div", { class: "notice", text: h ? "Este tren no está circulando ahora mismo. Te mostramos su horario de hoy." : "No encontramos este tren ni en circulación ni en el horario de hoy." }));
-    if (h) b.append(routeList({ stops: h.s, nextIdx: null, d: null }));
-    b.append(followRow(n)); b.append(histBox(n));
-    sh.hidden = false; draw(); return;
+  if (S.view !== "mapa") show("mapa");
+  const t = S.byNum.get(n); const h = HOR.trenes[n];
+  const sh = $("#sheet"), b = $("#sheet-body"); b.textContent = ""; S.selected = n;
+  const close = el("button", { class: "x", "aria-label": "Cerrar", onclick: closeSheet }, icon("x"));
+  if (!t) {
+    b.append(el("div", { class: "th" }, el("div", { style: "min-width:0" }, el("span", { class: "tag av", text: h ? (PROD_NOMBRE[h.p] || h.p) : "Tren" }), el("div", { class: "tname", text: h ? `${corto(h.s[0][0])} → ${corto(h.s[h.s.length - 1][0])}` : `Tren ${n}` }), el("div", { class: "tsub num", text: `Tren ${n}` })), close));
+    b.append(el("div", { class: "notice" }, icon("info"), el("span", { text: h ? (h.s[0][2] > S.now ? `Todavía no ha salido. Sale de ${estNombre(h.s[0][0])} a las ${hhmm(h.s[0][2])}.` : "No está enviando su posición ahora mismo. Este es su horario de hoy.") : "No encontramos este tren ni en circulación ni en el horario de hoy." })));
+    if (h) b.append(el("div", { class: "row" }, followBtn(n), el("button", { class: "btn", onclick: () => goRecoger(n) }, icon("clock"), "Voy a recogerlo")), routeList({ stops: h.s, nextIdx: null, d: null }));
+    b.append(histBox(n)); sh.hidden = false;
+    if (h && !silent) { const e = EST[h.s[0][0]]; if (e) centerOn(e[2], e[1], 110); }
+    draw(); setHash("tren-" + n); return;
   }
-  const next = t.stops && t.nextIdx != null ? t.stops[t.nextIdx] : null;
-  b.append(el("div", { class: "th" },
-    el("div", { style: "min-width:0" }, el("span", { class: "prod", text: prodNombre(t) }), el("div", { class: "tname", text: `${estNombre(t.o)} → ${estNombre(t.de)}` }), el("div", { class: "tsub" }, el("span", { class: "num", text: `Tren ${t.n}` }), t.mat ? ` · Serie ${t.mat.slice(0, 3)}` : "", t.acc ? " · Accesible" : "")),
-    el("button", { class: "x", "aria-label": "Cerrar", onclick: closeSheet, text: "×" })));
-  b.append(el("div", { class: "row" }, el("span", { class: "delay " + sev(t.d), text: delayText(t.d) })));
+  const next = t.stops && t.nextIdx != null ? t.stops[t.nextIdx] : null; const d = Math.max(0, t.d || 0);
   const fin = t.stops ? t.stops[t.stops.length - 1] : null;
+  b.append(el("div", { class: "th" },
+    el("div", { style: "min-width:0" }, el("div", { class: "row" }, el("span", { class: "tag av", text: prodNombre(t) }), el("span", { class: "pill " + sev(t.d), text: delayText(t.d) })),
+      el("div", { class: "tname", text: `${corto(t.o)} → ${corto(t.de)}` }),
+      el("div", { class: "tsub" }, el("span", { class: "num", text: `Tren ${t.n}` }), t.mat ? ` · Serie ${t.mat.slice(0, 3)}` : "", t.acc ? " · Accesible" : "")), close));
   b.append(el("div", { class: "facts" },
-    el("div", {}, el("small", { text: "Próxima" }), el("b", { text: next ? estNombre(next[0]) : "—" })),
-    el("div", {}, el("small", { text: "Llega allí" }), el("b", { class: "num", text: next ? hhmm(next[1] + Math.max(0, t.d || 0)) : "—" })),
-    el("div", {}, el("small", { text: "Destino" }), el("b", { class: "num", text: fin ? hhmm(fin[1] + Math.max(0, t.d || 0)) : "—" }))));
-  b.append(el("div", { class: "row" }, followBtn(t.n), el("button", { class: "btn", onclick: () => { $("#rc-tren").value = t.n; show("recoger"); renderRecoger(); } }, icon("clock"), "Voy a recogerlo")));
+    el("div", {}, el("small", { text: "Próxima parada" }), el("b", { text: next ? estNombre(next[0]) : "—" })),
+    el("div", {}, el("small", { text: "Llega allí" }), el("b", { class: "num", text: next ? hhmm(next[1] + d) : "—" })),
+    el("div", {}, el("small", { text: "A destino" }), el("b", { class: "num", text: fin ? hhmm(fin[1] + d) : "—" }))));
+  b.append(el("div", { class: "row" }, followBtn(t.n), el("button", { class: "btn", onclick: () => goRecoger(t.n) }, icon("clock"), "Voy a recogerlo"), el("button", { class: "btn ghost", "aria-label": "Compartir", onclick: () => shareTrain(t.n) }, icon("share"), "Compartir")));
   if (t.stops) { b.append(el("h3", { text: "Recorrido" })); b.append(routeList(t)); }
+  else b.append(el("p", { class: "muted", text: "No tenemos el horario de este tren para hoy, así que no podemos calcular las horas de paso." }));
   b.append(histBox(t.n));
-  if (!t.stops) b.append(el("p", { class: "note", text: "No tenemos el horario de este tren para hoy, así que no podemos calcular las horas de paso." }));
   sh.hidden = false;
   if (!silent) centerOn(t.lon, t.lat, 110);
-  draw();
+  draw(); setHash("tren-" + n);
+}
+function openCercanias(t) {
+  const sh = $("#sheet"), b = $("#sheet-body"); b.textContent = ""; S.selected = null;
+  b.append(el("div", { class: "th" }, el("div", { style: "min-width:0" }, el("div", { class: "row" }, el("span", { class: "tag", text: `Cercanías ${t.linea}` }), el("span", { class: "pill " + sev(t.d), text: delayText(t.d) })), el("div", { class: "tname", text: t.de ? `Hacia ${corto(t.de)}` : "Cercanías" }), el("div", { class: "tsub num", text: `Tren ${t.n}${t.nucleo ? " · núcleo " + t.nucleo : ""}` })), el("button", { class: "x", "aria-label": "Cerrar", onclick: closeSheet }, icon("x"))));
+  sh.hidden = false; draw();
 }
 function routeList(t) {
   const ul = el("ol", { class: "route" });
   t.stops.forEach((s, i) => {
     const cls = t.nextIdx == null ? "" : i < t.nextIdx ? "past" : i === t.nextIdx ? "next" : "";
-    const eta = t.d != null && t.nextIdx != null && i >= t.nextIdx && t.d > 0 ? hhmm(s[1] + t.d) : "";
-    const isSt = s[0] === S.station;
+    const late = t.d != null && t.nextIdx != null && i >= t.nextIdx && t.d > 0;
+    const mine = s[0] === P.casa || P.favs.includes(s[0]);
     ul.append(el("li", { class: cls }, el("span", { class: "t", text: hhmm(i === 0 ? s[2] : s[1]) }), el("span", { class: "k" }, el("i")),
-      el("span", {}, i === t.nextIdx ? el("b", { text: estNombre(s[0]) }) : estNombre(s[0]), isSt ? el("span", { class: "here", text: "  · tu estación" }) : null),
-      el("span", { class: "eta " + (eta ? sev(t.d) : ""), style: eta ? `color:var(--${sev(t.d)})` : "", text: eta })));
+      el("span", {}, i === t.nextIdx ? el("b", { text: estNombre(s[0]) }) : estNombre(s[0]), mine ? el("span", { class: "here", text: s[0] === P.casa ? "Tu estación" : "Favorita" }) : null),
+      el("span", { class: "eta", style: late ? `color:var(--${sev(t.d)})` : "", text: late ? hhmm(s[1] + t.d) : "" })));
   });
   return ul;
 }
 function histBox(n) {
-  const p = PUNT.trenes[n]; if (!p) return el("span");
+  const p = PUNT.trenes[n]; if (!p) return el("span", { hidden: true });
   return el("div", { class: "hist" },
-    el("div", { style: "min-width:0;flex:1.4" }, el("b", { text: "En octubre" }), el("div", { style: "color:var(--muted);font-size:12.5px", text: `Llegó en hora ${p.p5}% de los días · retraso típico ${p.med} min` })),
+    el("div", { style: "min-width:0;flex:1.4" }, el("b", { text: "Su último mes" }), el("div", { class: "muted", style: "font-size:12.5px", text: `Llegó en hora ${p.p5}% de los días. Retraso típico: ${p.med} min.` })),
     el("div", { class: "bar", title: `${p.p5}% en hora` }, el("i", { style: `width:${p.p5}%;background:var(--ok)` }), el("i", { style: `width:${Math.max(0, 100 - p.p5 - p.p15)}%;background:var(--warn)` }), el("i", { style: `width:${p.p15}%;background:var(--bad)` })));
 }
-function closeSheet() { $("#sheet").hidden = true; S.selected = null; draw(); }
-function icon(k) { const s = document.createElementNS("http://www.w3.org/2000/svg", "svg"); s.setAttribute("viewBox", "0 0 24 24"); s.innerHTML = k === "clock" ? '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/>' : k === "bell" ? '<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>' : '<path d="M5 12l5 5 9-10"/>'; return s; }
-function followBtn(n) { const on = S.follow.some(f => f.n === n); return el("button", { class: "btn" + (on ? "" : " primary"), onclick: () => { on ? unfollow(n) : follow(n); openTrain(n, true); } }, icon(on ? "ok" : "bell"), on ? "Siguiendo" : "Seguir y avisarme"); }
-function followRow(n) { return el("div", { class: "row" }, followBtn(n)); }
+function closeSheet() { $("#sheet").hidden = true; S.selected = null; draw(); if (location.hash.startsWith("#tren-")) setHash("mapa"); }
+function followBtn(n) { const on = isFollowed(n); return el("button", { class: "btn" + (on ? "" : " primary"), onclick: () => { on ? unfollow(n) : follow(n); if (S.view === "mapa") openTrain(n, true); else renderView(); } }, icon(on ? "check" : "bell"), on ? "Siguiendo" : "Avisarme"); }
+function goRecoger(n) { $("#rc-tren").value = n; show("recoger"); }
+async function shareTrain(n, stopCode) {
+  const t = S.byNum.get(n), h = HOR.trenes[n]; if (!h) return;
+  const c = stopCode || (t && t.de) || h.s[h.s.length - 1][0]; const a = atStop(n, c, "lle");
+  const txt = a ? `Mi tren ${PROD_NOMBRE[h.p] || h.p} ${n} llega a ${corto(c)} sobre las ${hhmm(a.est)}${a.d ? ` (lleva ${a.d} min de retraso)` : ""}.` : `Voy en el tren ${n}.`;
+  const url = location.protocol.startsWith("http") && !/claude/.test(location.hostname) ? `${location.origin}${location.pathname}#tren-${n}` : "";
+  try { if (navigator.share) { await navigator.share({ title: "Llegada", text: txt, url: url || undefined }); return; } } catch (e) { if (e && e.name === "AbortError") return; }
+  try { await navigator.clipboard.writeText(url ? `${txt} ${url}` : txt); toast("Copiado. Pégalo en WhatsApp para quien te espera."); } catch { toast(txt, 7000); }
+}
+
+/* ============ Seguir y avisos ============ */
+function follow(n) { if (!isFollowed(n)) { S.follow.push({ n, umbral: P.umbral, last: null, avisado: false }); store.set("follow", S.follow); toast(`Te avisaremos si el tren ${n} pasa de ${P.umbral} min de retraso.`); askNotif(); } renderFilters(); draw(); }
+function unfollow(n) { S.follow = S.follow.filter(f => f.n !== n); store.set("follow", S.follow); renderFilters(); draw(); }
+async function askNotif() { try { if ("Notification" in window && Notification.permission === "default") await Notification.requestPermission(); } catch {} }
+function notify(title, body) {
+  S.log.unshift({ t: Date.now(), title, body }); S.log = S.log.slice(0, 30); store.set("log", S.log);
+  toast(`${title}. ${body}`, 5200);
+  try { if ("Notification" in window && Notification.permission === "granted") { if (navigator.serviceWorker && navigator.serviceWorker.controller) navigator.serviceWorker.ready.then(r => r.showNotification(title, { body, icon: "icon-192.png", badge: "icon-192.png", tag: title })); else new Notification(title, { body }); } } catch {}
+}
+function checkFollows() {
+  if (S.mode === "snapshot") return;
+  let changed = false;
+  for (const f of S.follow) {
+    const t = S.byNum.get(f.n);
+    if (!t) { if (f.last != null && !f.fin) { f.fin = true; changed = true; notify(`Tren ${f.n}`, "Ha terminado su recorrido o ha dejado de enviar su posición."); } continue; }
+    const d = t.d == null ? null : Math.max(0, t.d); if (d == null) continue;
+    const fin = t.stops ? ` Llegada a ${corto(t.de)} sobre las ${hhmm(t.stops[t.stops.length - 1][1] + d)}.` : "";
+    if (d >= f.umbral && !f.avisado) { notify(`Tren ${f.n} con ${d} min de retraso`, `${corto(t.o)} → ${corto(t.de)}.${fin}`); f.avisado = true; }
+    else if (f.last != null && Math.abs(d - f.last) >= 5) notify(`Tren ${f.n}: el retraso ${d > f.last ? "sube" : "baja"} a ${d} min`, `Antes llevaba ${f.last} min.${fin}`);
+    if (d < f.umbral - 3) f.avisado = false;
+    if (f.last !== d) changed = true; f.last = d; f.fin = false;
+  }
+  if (changed) store.set("follow", S.follow);
+}
+
+/* ============ Trenes entre dos estaciones ============ */
+function between(a, b, limit = 4) {
+  const out = [];
+  for (const [n, h] of Object.entries(HOR.trenes)) {
+    const i = h.s.findIndex(s => s[0] === a); if (i < 0) continue; const j = h.s.findIndex((s, k) => k > i && s[0] === b); if (j < 0) continue;
+    const st = atStop(n, a, "sal"); if (!st) continue;
+    if (st.passed || st.est < S.now - 1) continue;
+    out.push({ n, h, dep: h.s[i][2], arr: h.s[j][1], d: st.d, live: st.live, est: st.est });
+  }
+  return out.sort((x, y) => x.dep - y.dep).slice(0, limit);
+}
+function trainRow(o) {
+  const late = o.d && o.d > 2; const cls = !late ? "" : o.d > 15 ? "late" : "mid";
+  return el("button", { class: "tr" + (o.gone ? " gone" : ""), onclick: () => openTrain(o.n) },
+    el("span", { class: "time " + cls }, late ? el("s", { text: hhmm(o.prog) }) : null, hhmm(late ? o.est : o.prog)),
+    el("span", { class: "what" }, el("b", { text: o.title }), el("span", { text: o.sub })),
+    el("span", { class: "side" }, el("span", { class: "pill " + o.pill[0], text: o.pill[1] }), o.small ? el("small", { text: o.small }) : null));
+}
+const minsTo = m => { const x = Math.round(m - S.now); return x <= 0 ? "ahora" : x < 60 ? `en ${x} min` : `en ${dur(x)}`; };
+function pillFor(st, kind) {
+  if (st.passed) return ["none", kind === "sal" ? "Ha salido" : "Ha llegado"];
+  if (st.d == null) return ["none", st.prog < S.now ? "Sin datos" : "Programado"];
+  if (st.d <= 2) return ["ok", "En hora"];
+  return [sev(st.d), `+${st.d} min`];
+}
+function viaText(h, i, j) { const mid = h.s.slice(i + 1, j).map(s => s[0]).filter(c => c in CIUDADES).slice(0, 2).map(corto); return mid.length ? "por " + mid.join(", ") : "directo"; }
+
+/* ============ Inicio ============ */
+function greet() { const h = Math.floor(localParts(new Date()).min / 60); return h < 6 ? "Buenas noches" : h < 14 ? "Buenos días" : h < 21 ? "Buenas tardes" : "Buenas noches"; }
+function renderInicio() {
+  const box = $("#home"); box.textContent = "";
+  box.append(el("div", { class: "hello" }, el("small", { text: new Date().toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" }) }), el("h1", { text: P.nombre ? `${greet()}, ${P.nombre}` : greet() })));
+  if (S.mode !== "live") box.append(el("div", { class: "notice" }, icon("info"), el("span", { text: S.mode === "mirror" ? "Las posiciones llegan con hasta 30 minutos de retraso. Cuando se conecte el servidor, verás los trenes en directo." : `Estás viendo una foto real de las ${hhmm(S.now)}. Los trenes no se mueven hasta que haya conexión.` })));
+  // Trayectos
+  const tr = el("div", { class: "sec" }, el("div", { class: "sec-h" }, el("h3", { text: "Tus trayectos" }), el("button", { class: "link", onclick: () => addRouteForm(tr) }, "Añadir")));
+  if (!P.trayectos.length) tr.append(el("div", { class: "empty" }, el("b", { text: "Guarda el trayecto que haces a menudo" }), "Verás aquí los próximos trenes con su retraso, sin buscar nada.", el("button", { class: "btn primary", onclick: () => addRouteForm(tr) }, icon("route"), "Añadir trayecto")));
+  P.trayectos.forEach((r, idx) => {
+    const list = between(r[0], r[1], 4); const card = el("div", { class: "card route-card" });
+    card.append(el("div", { class: "route-head" }, el("b", { text: corto(r[0]) }), el("span", { class: "arrow", text: "→" }), el("b", { text: corto(r[1]) }),
+      el("button", { class: "x", "aria-label": "Invertir trayecto", title: "Invertir", onclick: () => { P.trayectos[idx] = [r[1], r[0]]; saveP(); renderInicio(); } }, icon("swap")),
+      el("button", { class: "x", style: "margin-left:0", "aria-label": "Quitar trayecto", onclick: () => { P.trayectos.splice(idx, 1); saveP(); renderInicio(); } }, icon("x"))));
+    if (!list.length) card.append(el("p", { class: "muted", style: "padding:0 14px 14px", text: "No quedan trenes directos hoy entre estas dos estaciones." }));
+    else {
+      const f = list[0]; const late = f.d && f.d > 2;
+      card.append(el("div", { class: "next-hero" }, el("small", { text: "Próximo tren" }), el("b", { text: hhmm(f.est) }), el("span", { class: "in", text: minsTo(f.est) }),
+        el("span", { text: `${PROD_NOMBRE[f.h.p] || f.h.p} ${f.n} · llega ${hhmm(f.arr + (f.d || 0))}${late ? ` · ${f.d} min de retraso` : f.live ? " · en hora" : ""}` })));
+      const ul = el("div", { class: "trains" });
+      for (const o of list.slice(1)) { const st = atStop(o.n, r[0], "sal"); ul.append(trainRow({ n: o.n, prog: o.dep, est: o.est, d: o.d, title: `Llega ${hhmm(o.arr + (o.d || 0))} · ${dur(o.arr - o.dep)}`, sub: `${PROD_NOMBRE[o.h.p] || o.h.p} ${o.n} · ${viaText(o.h, o.h.s.findIndex(s => s[0] === r[0]), o.h.s.findIndex(s => s[0] === r[1]))}`, pill: pillFor(st, "sal"), small: minsTo(o.est) })); }
+      card.append(ul);
+    }
+    tr.append(card);
+  });
+  box.append(tr);
+  // Siguiendo
+  if (S.follow.length) {
+    const sec = el("div", { class: "sec" }, el("h3", { text: "Trenes que sigues" })); const card = el("div", { class: "card trains" });
+    for (const f of S.follow) { const t = S.byNum.get(f.n), h = HOR.trenes[f.n]; if (!t && !h) continue;
+      const fin = h ? h.s[h.s.length - 1] : null; const d = t && t.d != null ? Math.max(0, t.d) : null;
+      const pill = t && d != null ? (d <= 2 ? ["ok", "En hora"] : [sev(d), `+${d} min`]) : t ? ["none", "Sin datos"] : h && h.s[0][2] > S.now ? ["none", "Programado"] : ["none", "Sin datos"];
+      card.append(trainRow({ n: f.n, prog: fin ? fin[1] : 0, est: fin ? fin[1] + (d || 0) : 0, d, title: `${corto(t ? t.o : h.s[0][0])} → ${corto(t ? t.de : fin[0])}`, sub: `${t ? prodNombre(t) : PROD_NOMBRE[h.p] || h.p} ${f.n} · llegada a destino`, pill, small: null })); }
+    sec.append(card); box.append(sec);
+  }
+  // Tu estación
+  const sal = departures(P.casa, "sal", 4);
+  const sec = el("div", { class: "sec" }, el("div", { class: "sec-h" }, el("h3", { text: `Salidas de ${corto(P.casa)}` }), el("button", { class: "link", onclick: () => { setStation(P.casa); show("estacion"); } }, "Ver todas")));
+  if (!sal.length) sec.append(el("div", { class: "empty", text: "No hay más salidas en las próximas tres horas." }));
+  else { const card = el("div", { class: "card trains" }); for (const r of sal) card.append(boardRow(r, "sal")); sec.append(card); }
+  box.append(sec);
+  // Avisos
+  if (S.avisos && (S.avisos.avisos || []).length) { const a = el("div", { class: "sec" }, el("h3", { text: "Avisos de la red" })); for (const x of S.avisos.avisos.slice(0, 3)) a.append(alertEl(x)); box.append(a); }
+  box.append(el("div", { class: "row" }, el("button", { class: "btn", onclick: () => show("recoger") }, icon("clock"), "Voy a recoger a alguien"), el("button", { class: "btn", onclick: () => show("mapa") }, icon("map"), "Ver el mapa")));
+}
+function addRouteForm(sec) {
+  if (sec.querySelector(".add-route")) return;
+  const a = el("input", { class: "input", list: "st-list", placeholder: "Desde", value: corto(P.casa) === "—" ? "" : estNombre(P.casa), "aria-label": "Estación de salida", id: "ar-a" });
+  const b = el("input", { class: "input", list: "st-list", placeholder: "Hasta", "aria-label": "Estación de llegada", id: "ar-b" });
+  const form = el("form", { class: "card pad-in add-route", onsubmit: e => { e.preventDefault(); const x = findStation(a.value), y = findStation(b.value); if (!x || !y) return toast("No encontramos alguna de las dos estaciones. Elige una de la lista."); if (x.c === y.c) return toast("Elige dos estaciones distintas."); P.trayectos.push([x.c, y.c]); saveP(); renderInicio(); } },
+    el("b", { text: "Nuevo trayecto" }), el("div", { class: "grid2" }, a, b), el("div", { class: "row" }, el("button", { class: "btn primary", type: "submit" }, "Guardar"), el("button", { class: "btn ghost", type: "button", onclick: () => form.remove() }, "Cancelar")));
+  sec.insertBefore(form, sec.children[1]); b.focus();
+}
+function alertEl(a) { return el("div", { class: "alert" + (a.grave ? " bad" : "") }, el("b", { text: a.titulo }), a.texto ? el("span", { text: a.texto }) : null, el("small", { text: `${a.fuente}${a.fecha ? " · " + a.fecha : ""}` })); }
 
 /* ============ Estación ============ */
-function setStation(c) { S.station = c; store.set("station", c); $("#st-in").value = estNombre(c); renderEstacion(); }
-const dl = $("#st-list"); for (const s of ESTLIST) dl.append(el("option", { value: s.n }));
-$("#st-in").addEventListener("change", () => { const v = norm($("#st-in").value); const s = ESTLIST.find(x => x.k === v) || ESTLIST.find(x => x.k.startsWith(v)) || ESTLIST.find(x => x.k.includes(v)); if (s) setStation(s.c); });
-$("#seg-sal").onclick = () => { S.boardMode = "sal"; renderEstacion(); }; $("#seg-lle").onclick = () => { S.boardMode = "lle"; renderEstacion(); };
-function renderEstacion() {
-  const c = S.station; $("#st-name").textContent = estNombre(c); if (document.activeElement !== $("#st-in")) $("#st-in").value = estNombre(c);
-  $("#st-clock").textContent = hhmm(S.now);
-  const sal = S.boardMode === "sal";
-  $("#seg-sal").setAttribute("aria-pressed", sal); $("#seg-lle").setAttribute("aria-pressed", !sal);
-  $("#st-col").textContent = sal ? "Destino" : "Procede de";
-  const rows = [];
+function departures(c, kind, limit = 40, dest = null) {
+  const sal = kind === "sal"; const rows = [];
   for (const [n, h] of Object.entries(HOR.trenes)) {
     const i = h.s.findIndex(s => s[0] === c); if (i < 0) continue;
     if (sal && i === h.s.length - 1) continue; if (!sal && i === 0) continue;
-    const s = h.s[i]; const prog = sal ? s[2] : s[1];
-    const live = S.byNum.get(n); const d = live && live.d != null ? Math.max(0, live.d) : null;
-    let passed = false;
-    if (live && live.nextIdx != null) passed = live.nextIdx > i || (live.nextIdx === i && sal && false);
-    const est = prog + (d || 0);
-    if (est < S.now - 10 || prog > S.now + 180) continue;
-    if (!live && prog < S.now - 2) passed = true;
-    rows.push({ n, h, prog, d, est, live, passed, other: sal ? h.s[h.s.length - 1][0] : h.s[0][0] });
+    if (dest && !(sal ? h.s.slice(i + 1) : h.s.slice(0, i)).some(s => s[0] === dest)) continue;
+    const st = atStop(n, c, kind);
+    if (st.est < S.now - 15 || st.prog > S.now + 180) continue;
+    if (st.passed && st.est < S.now - 5) continue;
+    rows.push({ n, h, i, st, other: sal ? h.s[h.s.length - 1][0] : h.s[0][0] });
   }
-  rows.sort((a, b) => a.prog - b.prog);
-  const tb = $("#st-rows"); tb.textContent = "";
-  if (!rows.length) tb.append(el("tr", {}, el("td", { colspan: 3, class: "sched", style: "white-space:normal;font-size:15px", text: "Sin trenes previstos en las próximas tres horas." })));
-  for (const r of rows.slice(0, 30)) {
-    const st = r.passed ? ["sched", sal ? "SALIDO" : "LLEGADO"] : r.d == null ? ["sched", r.prog < S.now ? "SIN DATOS" : "PREVISTO"] : r.d <= 2 ? ["ontime", "EN HORA"] : ["late", `+${r.d} MIN`];
-    tb.append(el("tr", { class: "click" + (r.passed ? " gone" : ""), tabindex: 0, onclick: () => { show("mapa"); openTrain(r.n); }, onkeydown: e => { if (e.key === "Enter") { show("mapa"); openTrain(r.n); } } },
-      el("td", { text: hhmm(r.prog) }), el("td", {}, el("span", { class: "tp", text: (PROD_NOMBRE[r.h.p] || r.h.p || "").toUpperCase() + " · " + r.n }), el("span", { class: "dest", text: estNombre(r.other) })),
-      el("td", { class: st[0], text: st[1] })));
-  }
-  $("#st-foot").textContent = S.mode === "snapshot" ? `Situación a las ${hhmm(S.now)} según la instantánea. Renfe: AVE, Avant, Alvia, Intercity, Media Distancia y Regionales. Iryo y Ouigo no publican sus datos.` : `Horario oficial de Renfe con el retraso real de cada tren en circulación. Iryo y Ouigo no publican sus datos.`;
+  return rows.sort((a, b) => a.st.prog - b.st.prog).slice(0, limit);
+}
+function boardRow(r, kind) {
+  const sal = kind === "sal"; const j = sal ? r.h.s.length - 1 : 0;
+  return trainRow({ n: r.n, prog: r.st.prog, est: r.st.est, d: r.st.d, gone: r.st.passed,
+    title: `${sal ? "" : "De "}${corto(r.other)}`, sub: `${PROD_NOMBRE[r.h.p] || r.h.p} ${r.n} · ${sal ? viaText(r.h, r.i, j) : viaText(r.h, j, r.i)}`,
+    pill: pillFor(r.st, kind), small: r.st.passed ? null : minsTo(r.st.est) });
+}
+function setStation(c) { S.station = c; S.destFilter = null; store.set("station", c); if (S.view === "estacion") renderEstacion(); }
+function stationPicker(onPick, placeholder) {
+  const wrap = el("div", { class: "picker" }); const inp = el("input", { class: "input", type: "search", placeholder, autocomplete: "off", "aria-label": placeholder }); const res = el("div", { class: "results", hidden: true });
+  inp.addEventListener("input", () => { const q = norm(inp.value.trim()); res.textContent = ""; if (!q) { res.hidden = true; return; }
+    const hits = ESTLIST.filter(s => s.k.includes(q)).sort((a, b) => (b.k.startsWith(q) - a.k.startsWith(q)) || ((b.c in CIUDADES) - (a.c in CIUDADES))).slice(0, 7);
+    for (const s of hits) res.append(el("button", { type: "button", onclick: () => { res.hidden = true; inp.value = ""; onPick(s.c); } }, icon("pin"), el("span", { class: "mid" }, el("b", { text: s.n }))));
+    if (!hits.length) res.append(el("div", { class: "muted", style: "padding:12px", text: "No hay ninguna estación con ese nombre." })); res.hidden = false; });
+  inp.addEventListener("blur", () => setTimeout(() => res.hidden = true, 200));
+  wrap.append(inp, res); return wrap;
+}
+function renderEstacion() {
+  const box = $("#station"); box.textContent = ""; const c = S.station; const sal = S.boardMode === "sal";
+  const fav = P.favs.includes(c);
+  box.append(el("div", { class: "st-head" },
+    el("div", { class: "st-title" }, el("h1", { text: estNombre(c) }), el("button", { class: "star", "aria-pressed": fav ? "true" : "false", "aria-label": fav ? "Quitar de favoritas" : "Guardar como favorita", onclick: () => { P.favs = fav ? P.favs.filter(x => x !== c) : [...P.favs, c]; saveP(); renderEstacion(); toast(fav ? "Quitada de favoritas" : "Guardada en favoritas"); } }, icon("star", ""))),
+    el("div", { class: "st-meta" }, c === P.casa ? el("span", { class: "tag av", text: "Tu estación" }) : el("button", { class: "link", onclick: () => { P.casa = c; saveP(); renderEstacion(); toast(`${corto(c)} es ahora tu estación.`); } }, "Hacer que sea mi estación"), stationPunct(c))));
+  const quick = el("div", { class: "chips" });
+  for (const x of [...new Set([P.casa, ...P.favs])].filter(x => x !== c && EST[x])) quick.append(el("button", { class: "chip", onclick: () => setStation(x) }, icon("star"), corto(x)));
+  quick.append(el("button", { class: "chip", onclick: () => locate((la, lo) => setStation(nearest(la, lo))) }, icon("pin"), "Cerca de mí"));
+  box.append(stationPicker(setStation, "Buscar otra estación"), quick);
+  const tb = el("div", { class: "toolbar" }, el("div", { class: "seg", role: "group", "aria-label": "Salidas o llegadas" },
+    el("button", { "aria-pressed": sal ? "true" : "false", onclick: () => { S.boardMode = "sal"; renderEstacion(); } }, "Salidas"),
+    el("button", { "aria-pressed": !sal ? "true" : "false", onclick: () => { S.boardMode = "lle"; renderEstacion(); } }, "Llegadas")));
+  // destinos frecuentes para filtrar
+  const dests = new Map(); for (const r of departures(c, S.boardMode, 200)) { const o = r.other; if (o in CIUDADES) dests.set(o, (dests.get(o) || 0) + 1); }
+  const dchips = el("div", { class: "chips" }, el("button", { class: "chip", "aria-pressed": !S.destFilter ? "true" : "false", onclick: () => { S.destFilter = null; renderEstacion(); } }, "Todos"));
+  for (const [o] of [...dests].sort((a, b) => b[1] - a[1]).slice(0, 6)) dchips.append(el("button", { class: "chip", "aria-pressed": S.destFilter === o ? "true" : "false", onclick: () => { S.destFilter = o; renderEstacion(); } }, (sal ? "A " : "De ") + corto(o)));
+  box.append(el("div", { class: "sec" }, tb, dchips));
+  const rows = departures(c, S.boardMode, 40, S.destFilter);
+  const upcoming = rows.filter(r => !r.st.passed);
+  if (upcoming.length) { const f = upcoming[0]; const late = f.st.d && f.st.d > 2;
+    box.append(el("div", { class: "next-hero", style: "margin:0" }, el("small", { text: sal ? "Próxima salida" : "Próxima llegada" }), el("b", { text: hhmm(f.st.est) }), el("span", { class: "in", text: minsTo(f.st.est) }),
+      el("span", { text: `${PROD_NOMBRE[f.h.p] || f.h.p} ${f.n} ${sal ? "a" : "desde"} ${corto(f.other)}${late ? ` · ${f.st.d} min de retraso` : f.st.live ? " · en hora" : ""}` }))); }
+  const list = el("div", { class: "card trains" });
+  if (!rows.length) list.append(el("p", { class: "muted", style: "padding:16px", text: `No hay ${sal ? "salidas" : "llegadas"} previstas en las próximas tres horas.` }));
+  for (const r of rows) list.append(boardRow(r, S.boardMode));
+  box.append(list);
+  if (S.destFilter && sal && !P.trayectos.some(t => t[0] === c && t[1] === S.destFilter)) box.append(el("button", { class: "btn", onclick: () => { P.trayectos.push([c, S.destFilter]); saveP(); toast("Trayecto guardado. Lo verás en Inicio."); renderEstacion(); } }, icon("route"), `Guardar ${corto(c)} → ${corto(S.destFilter)} en Inicio`));
+  box.append(el("p", { class: "muted", style: "font-size:12.5px", text: "Trenes de Renfe con horario oficial y retraso real. Iryo y Ouigo no publican sus datos." }));
+}
+function stationPunct(c) {
+  const ps = Object.entries(PUNT.trenes).filter(([n, p]) => p.n >= 10 && HOR.trenes[n] && HOR.trenes[n].s.some(s => s[0] === c)).map(([, p]) => p);
+  if (ps.length < 3) return null; const v = Math.round(ps.reduce((a, p) => a + p.p5, 0) / ps.length);
+  return el("span", { text: `En el último mes, el ${v}% de sus trenes llegaron en hora.` });
 }
 
 /* ============ Recoger ============ */
 function renderRecoger() {
   const n = $("#rc-tren").value.trim().padStart(5, "0"); const out = $("#rc-out"); out.textContent = "";
   const h = HOR.trenes[n]; const sel = $("#rc-est");
-  if (!$("#rc-tren").value.trim()) { out.append(el("div", { class: "empty" }, el("b", { text: "Escribe el número de tren" }), "Aparece en el billete. Si no lo tienes, búscalo en el mapa o en el panel de su estación y pulsa «Voy a recogerlo».")); sel.textContent = ""; return; }
-  if (!h) { out.append(el("div", { class: "empty" }, el("b", { text: `No hay ningún tren ${n} hoy` }), "Revisa el número. Solo tenemos trenes de Renfe de Alta Velocidad, Larga y Media Distancia.")); sel.textContent = ""; return; }
-  const prev = sel.value || store.get("rc-est", null);
-  if (sel.dataset.tren !== n) { sel.textContent = ""; h.s.slice(1).forEach(s => sel.append(el("option", { value: s[0], text: `${estNombre(s[0])} · ${hhmm(s[1])}` }))); sel.dataset.tren = n;
-    const want = h.s.some(s => s[0] === prev) ? prev : h.s.some(s => s[0] === S.station) ? S.station : h.s[h.s.length - 1][0]; sel.value = want; }
-  const c = sel.value; store.set("rc-est", c);
-  const s = h.s.find(x => x[0] === c); const live = S.byNum.get(n);
-  const d = live && live.d != null ? Math.max(0, live.d) : 0;
-  const llega = s[1] + d; const viaje = Math.max(0, +$("#rc-min").value || 0); const margen = Math.max(0, +$("#rc-margen").value || 0);
-  const salir = llega - viaje - margen; const falta = salir - S.now;
-  const yaLlego = live && live.nextIdx != null && h.s.findIndex(x => x[0] === c) < live.nextIdx;
-  let txt = falta > 0 ? `Quedan ${falta >= 60 ? Math.floor(falta / 60) + " h " : ""}${Math.round(falta % 60)} min` : falta > -viaje ? "Sal ya" : "Ya deberías estar de camino";
-  if (yaLlego || (!live && s[1] < S.now)) txt = "El tren ya ha pasado por esa estación";
+  if (!$("#rc-tren").value.trim()) {
+    out.append(el("div", { class: "empty" }, el("b", { text: "Escribe el número de su tren" }), "Viene en el billete. Si no lo tienes, búscalo por estación."));
+    const near = departures(P.casa, "lle", 5).filter(r => !r.st.passed);
+    if (near.length) { const c = el("div", { class: "card trains" }); for (const r of near) c.append(el("button", { class: "tr", onclick: () => { $("#rc-tren").value = r.n; sel.dataset.tren = ""; store.set("rc-est", P.casa); renderRecoger(); } }, el("span", { class: "time", text: hhmm(r.st.est) }), el("span", { class: "what" }, el("b", { text: `De ${corto(r.other)}` }), el("span", { text: `${PROD_NOMBRE[r.h.p] || r.h.p} ${r.n}` })), el("span", { class: "side" }, el("span", { class: "link", text: "Elegir" }))));
+      out.append(el("h3", { text: `Próximas llegadas a ${corto(P.casa)}` }), c); }
+    sel.textContent = ""; return; }
+  if (!h) { out.append(el("div", { class: "empty" }, el("b", { text: `No hay ningún tren ${n} hoy` }), "Revisa el número. Llegada incluye los trenes de Renfe de Alta Velocidad, Larga y Media Distancia.")); sel.textContent = ""; return; }
+  if (sel.dataset.tren !== n) { const prev = store.get("rc-est", P.casa); sel.textContent = ""; h.s.slice(1).forEach(s => sel.append(el("option", { value: s[0], text: `${estNombre(s[0])} · ${hhmm(s[1])}` }))); sel.dataset.tren = n;
+    sel.value = h.s.some(s => s[0] === prev) ? prev : h.s.some(s => s[0] === P.casa) ? P.casa : h.s[h.s.length - 1][0]; }
+  const c = sel.value; store.set("rc-est", c); store.set("rc-tren", n);
+  const st = atStop(n, c, "lle"); const viaje = Math.max(0, +$("#rc-min").value || 0), margen = Math.max(0, +$("#rc-margen").value || 0);
+  P.minutos = viaje; P.margen = margen; saveP();
+  const salir = st.est - viaje - margen; const falta = salir - S.now;
+  let txt = falta > 0 ? `Te quedan ${falta >= 60 ? dur(falta) : Math.round(falta) + " min"}` : falta > -viaje ? "Sal ya" : "Ya deberías estar de camino";
+  if (st.passed) txt = "El tren ya ha pasado por esa estación";
   out.append(el("div", { class: "big" }, el("small", { text: "Sal de casa a las" }), el("b", { text: hhmm(salir) }), el("span", { text: txt })));
-  out.append(el("div", { class: "steps" },
-    el("div", { class: "kpi" }, el("small", { text: "Llegada prevista" }), el("b", { class: "num", text: hhmm(llega) }), el("span", { text: d ? `Horario ${hhmm(s[1])}` : "Según horario" })),
-    el("div", { class: "kpi" }, el("small", { text: "Retraso ahora" }), el("b", { class: "num", style: `color:var(--${live ? sev(live.d) : "muted"})`, text: live ? (d ? `+${d}` : "0") : "—" }), el("span", { text: live ? "min" : "aún no circula" })),
+  out.append(el("div", { class: "kpis" },
+    el("div", { class: "kpi" }, el("small", { text: "Llega a las" }), el("b", { class: "num", text: hhmm(st.est) }), el("span", { text: st.d ? `Horario ${hhmm(st.prog)}` : "Según horario" })),
+    el("div", { class: "kpi" }, el("small", { text: "Retraso" }), el("b", { class: "num", style: `color:var(--${st.live ? sev(st.d) : "muted"})`, text: st.live ? (st.d ? `+${st.d}` : "0") : "—" }), el("span", { text: st.live ? "minutos" : "aún no circula" })),
     el("div", { class: "kpi" }, el("small", { text: "Tren" }), el("b", { class: "num", text: n }), el("span", { text: PROD_NOMBRE[h.p] || h.p }))));
-  if (!live) out.append(el("div", { class: "notice" }, icon("clock"), el("span", { text: "El tren todavía no ha salido o no está enviando su posición. La hora se corregirá sola con el retraso real en cuanto empiece a circular." })));
-  out.append(el("div", { class: "row" }, followBtn(n), el("button", { class: "btn", onclick: () => { show("mapa"); openTrain(n); } }, "Ver en el mapa")));
+  if (!st.live && !st.passed) out.append(el("div", { class: "notice" }, icon("clock"), el("span", { text: "Todavía no ha salido o no está enviando su posición. La hora se corregirá sola en cuanto empiece a circular." })));
+  out.append(el("div", { class: "row" }, followBtn(n), el("button", { class: "btn", onclick: () => openTrain(n) }, icon("map"), "Ver en el mapa"), el("button", { class: "btn ghost", onclick: () => shareTrain(n, c) }, icon("share"), "Compartir")));
 }
 for (const id of ["#rc-tren", "#rc-min", "#rc-margen"]) $(id).addEventListener("input", renderRecoger);
 $("#rc-est").addEventListener("change", renderRecoger);
+$("#rc-min").value = P.minutos; $("#rc-margen").value = P.margen; $("#rc-tren").value = store.get("rc-tren", "") && HOR.trenes[store.get("rc-tren", "")] ? store.get("rc-tren", "") : "";
 
-/* ============ Seguir y avisos ============ */
-function follow(n) { if (!S.follow.some(f => f.n === n)) { S.follow.push({ n, umbral: S.umbral, last: null, avisado: false }); store.set("follow", S.follow); toast(`Siguiendo el tren ${n}. Te avisamos si pasa de ${S.umbral} min.`); } renderFilters(); draw(); renderSeguir(); }
-function unfollow(n) { S.follow = S.follow.filter(f => f.n !== n); store.set("follow", S.follow); renderFilters(); draw(); renderSeguir(); }
-function notify(title, body) {
-  S.log.unshift({ t: Date.now(), title, body }); S.log = S.log.slice(0, 30); store.set("log", S.log);
-  toast(`${title}. ${body}`, 5000);
-  try { if ("Notification" in window && Notification.permission === "granted") { if (navigator.serviceWorker && navigator.serviceWorker.controller) navigator.serviceWorker.ready.then(r => r.showNotification(title, { body, icon: "icon.svg", tag: title })); else new Notification(title, { body }); } } catch {}
-}
-function checkFollows() {
-  if (S.mode === "snapshot") return; // con una foto fija no hay cambios que avisar
-  let changed = false;
-  for (const f of S.follow) {
-    const t = S.byNum.get(f.n); if (!t) { if (f.last != null && !f.fin) { f.fin = true; changed = true; notify(`Tren ${f.n}`, "Ha terminado su recorrido o ha dejado de enviar su posición."); } continue; }
-    const d = t.d == null ? null : Math.max(0, t.d);
-    if (d != null) {
-      if (d >= f.umbral && !f.avisado) { notify(`Tren ${f.n} con +${d} min`, `${estNombre(t.o)} → ${estNombre(t.de)}. Llegada a destino sobre las ${t.stops ? hhmm(t.stops[t.stops.length - 1][1] + d) : "—"}.`); f.avisado = true; }
-      else if (f.last != null && Math.abs(d - f.last) >= 5) notify(`Tren ${f.n}: el retraso ${d > f.last ? "sube" : "baja"} a ${d} min`, `Antes llevaba ${f.last} min.`);
-      if (d < f.umbral - 3) f.avisado = false;
-      if (f.last !== d) changed = true; f.last = d; f.fin = false;
-    }
-  }
-  if (changed) store.set("follow", S.follow);
-}
-function renderSeguir() {
-  const box = $("#sg-list"); box.textContent = "";
-  if (!S.follow.length) box.append(el("div", { class: "empty" }, el("b", { text: "Todavía no sigues ningún tren" }), "Escribe su número arriba, o abre un tren en el mapa y pulsa «Seguir y avisarme»."));
-  else { const l = el("div", { class: "list" });
-    for (const f of S.follow) { const t = S.byNum.get(f.n), h = HOR.trenes[f.n];
-      const ruta = t ? `${estNombre(t.o)} → ${estNombre(t.de)}` : h ? `${estNombre(h.s[0][0])} → ${estNombre(h.s[h.s.length - 1][0])}` : "Sin horario hoy";
-      const estado = t ? delayText(t.d) : h ? (h.s[0][2] > S.now ? `Sale a las ${hhmm(h.s[0][2])}` : "No circula ahora") : "—";
-      l.append(el("div", { class: "li" }, el("span", { class: "tn", text: f.n }), el("button", { class: "mid", style: "background:none;border:0;text-align:left;padding:0", onclick: () => { show("mapa"); openTrain(f.n); } }, el("b", { text: ruta }), el("span", { text: `Aviso desde ${f.umbral} min` })),
-        el("div", { class: "r" }, el("b", { style: `color:var(--${t ? sev(t.d) : "muted"})`, text: estado }), el("div", {}, el("button", { class: "chip", style: "margin-top:4px", onclick: () => unfollow(f.n), text: "Quitar" }))))); }
-    box.append(l); }
-  const lg = $("#sg-log"); lg.textContent = "";
-  if (!S.log.length) lg.append(el("p", { text: S.mode === "snapshot" ? "Los avisos funcionan con datos en directo. Con la instantánea no hay cambios que avisar." : "Sin avisos todavía." }));
-  for (const a of S.log.slice(0, 10)) lg.append(el("div", { class: "alert" }, el("b", { text: a.title }), el("span", { text: a.body }), el("small", { text: new Date(a.t).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }) })));
-  const st = $("#sg-notif-st");
-  st.textContent = !("Notification" in window) ? "Este navegador no permite notificaciones. Los avisos aparecerán dentro de la app." : Notification.permission === "granted" ? "Notificaciones activadas. Con la app abierta o en segundo plano te llegan al móvil." : Notification.permission === "denied" ? "Has bloqueado las notificaciones. Puedes permitirlas en los ajustes del navegador." : "Activa los avisos para recibirlos como notificación del móvil.";
-}
-$("#sg-add").onclick = () => { const v = $("#sg-tren").value.trim(); if (!v) return toast("Escribe el número de tren."); const n = v.padStart(5, "0"); if (!HOR.trenes[n] && !S.byNum.has(n)) return toast(`No hay ningún tren ${n} hoy.`); follow(n); $("#sg-tren").value = ""; };
-$("#sg-umbral").value = S.umbral; $("#sg-umbral").addEventListener("change", () => { S.umbral = Math.max(1, +$("#sg-umbral").value || 10); store.set("umbral", S.umbral); });
-$("#sg-notif").onclick = async () => { try { if (!("Notification" in window)) throw 0; const r = await Notification.requestPermission(); toast(r === "granted" ? "Notificaciones activadas." : "Sin permiso: los avisos se verán dentro de la app."); } catch { toast("Aquí no se pueden activar notificaciones. Instala la app desde el navegador del móvil."); } renderSeguir(); };
-
-/* ============ Puntualidad ============ */
-function renderDatos() {
-  const all = Object.entries(PUNT.trenes);
-  const c = (() => { const v = norm($("#pt-est").value); if (!v) return null; const s = ESTLIST.find(x => x.k === v) || ESTLIST.find(x => x.k.includes(v)); return s ? s.c : null; })();
-  const pasa = n => !c || (HOR.trenes[n] && HOR.trenes[n].s.some(s => s[0] === c)) || PUNT.trenes[n].o === c || PUNT.trenes[n].d === c;
-  const rows = all.filter(([n, p]) => p.n >= 10 && pasa(n));
-  $("#pt-lede").textContent = `Retraso con el que llegó cada tren de Renfe, día a día, del ${fmtD(PUNT.desde)} al ${fmtD(PUNT.hasta)}. ${c ? "Solo trenes que pasan por " + estNombre(c) + "." : "Toda la red de Alta Velocidad, Larga y Media Distancia."}`;
-  const k = $("#pt-kpis"); k.textContent = "";
+/* ============ Tú ============ */
+function setting(title, desc, control) { return el("div", { class: "setting" }, el("div", { class: "txt" }, el("b", { text: title }), desc ? el("span", { text: desc }) : null), control); }
+function renderTu() {
+  const box = $("#tu"); box.textContent = "";
+  box.append(el("div", { class: "sec" }, el("h1", { text: "Tú" }), el("p", { class: "lede", text: "Todo se guarda solo en este móvil. No hay cuentas ni se envía nada a ningún sitio." })));
+  const nombre = el("input", { class: "input", id: "tu-nombre", value: P.nombre, placeholder: "Tu nombre", maxlength: 30, "aria-label": "Tu nombre" }); nombre.addEventListener("change", () => { P.nombre = nombre.value.trim(); saveP(); });
+  const umbral = el("input", { class: "input num", id: "tu-umbral", type: "number", min: 1, max: 120, value: P.umbral, style: "width:84px", "aria-label": "Minutos de retraso" }); umbral.addEventListener("change", () => { P.umbral = Math.max(1, +umbral.value || 10); saveP(); for (const f of S.follow) f.umbral = P.umbral; store.set("follow", S.follow); });
+  const tema = el("select", { class: "input", id: "tu-tema", "aria-label": "Tema" }, ...["sistema", "claro", "oscuro"].map(v => el("option", { value: v, selected: P.tema === v, text: v === "sistema" ? "Como el móvil" : v === "claro" ? "Claro" : "Oscuro" }))); tema.addEventListener("change", () => { P.tema = tema.value; saveP(); applyTheme(); });
+  const notifOn = "Notification" in window && Notification.permission === "granted";
+  const nsw = el("label", { class: "switch" }, el("input", { type: "checkbox", id: "tu-notif", checked: notifOn, "aria-label": "Notificaciones", onchange: async e => { if (e.target.checked) { try { const r = await Notification.requestPermission(); toast(r === "granted" ? "Notificaciones activadas." : "Sin permiso: los avisos se verán dentro de la app."); } catch { toast("Aquí no se pueden activar. Instala Llegada desde el navegador del móvil."); } } else toast("Para quitarlas del todo, hazlo en los ajustes del navegador."); renderTu(); } }));
+  const csw = el("label", { class: "switch" }, el("input", { type: "checkbox", id: "tu-cerc", checked: P.cercanias, disabled: !hasAPI(), "aria-label": "Cercanías en el mapa", onchange: e => { P.cercanias = e.target.checked; saveP(); if (P.cercanias) loadCercanias(); else { S.cerc = []; renderFilters(); draw(); } } }));
+  box.append(el("div", { class: "sec" }, el("h3", { text: "Perfil" }), el("div", { class: "card" },
+    setting("Nombre", "Para saludarte en Inicio", nombre),
+    setting("Tu estación", estNombre(P.casa), el("button", { class: "btn ghost", onclick: () => { setStation(P.casa); show("estacion"); } }, "Cambiar")),
+    setting("Estaciones favoritas", P.favs.length ? P.favs.map(corto).join(", ") : "Márcalas con la estrella en Estación", null),
+    setting("Trayectos guardados", P.trayectos.length ? P.trayectos.map(t => `${corto(t[0])} → ${corto(t[1])}`).join(" · ") : "Añádelos desde Inicio", null))));
+  box.append(el("div", { class: "sec" }, el("h3", { text: "Avisos" }), el("div", { class: "card" },
+    setting("Notificaciones en el móvil", "Con Llegada abierta o en segundo plano", nsw),
+    setting("Avisarme desde", "Minutos de retraso de un tren que sigues", umbral),
+    setting("Trenes que sigues", S.follow.length ? S.follow.map(f => f.n).join(", ") : "Ninguno todavía", S.follow.length ? el("button", { class: "btn ghost", onclick: () => { S.follow = []; store.set("follow", S.follow); renderTu(); renderFilters(); } }, "Dejar todos") : null))));
+  if (S.log.length) { const l = el("div", { class: "sec" }, el("h3", { text: "Últimos avisos" })); for (const a of S.log.slice(0, 6)) l.append(el("div", { class: "alert" }, el("b", { text: a.title }), el("span", { text: a.body }), el("small", { text: new Date(a.t).toLocaleString("es-ES", { hour: "2-digit", minute: "2-digit", day: "numeric", month: "short" }) }))); box.append(l); }
+  box.append(el("div", { class: "sec" }, el("h3", { text: "Pantalla" }), el("div", { class: "card" }, setting("Tema", null, tema), setting("Cercanías en el mapa", hasAPI() ? "Muestra también los trenes de Cercanías" : "Disponible con datos en directo", csw))));
+  // Puntualidad de la red
+  const pt = el("div", { class: "sec" }, el("h2", { text: "Puntualidad" }), el("p", { class: "lede", text: `Retraso con el que llegó cada tren, día a día, del ${fmtD(PUNT.desde)} al ${fmtD(PUNT.hasta)}.` }));
+  pt.append(stationPicker(c => { S.ptEst = c; renderTu(); }, S.ptEst ? `Filtrado: ${estNombre(S.ptEst)}` : "Filtrar por estación"));
+  if (S.ptEst) pt.append(el("div", { class: "row" }, el("button", { class: "chip", "aria-pressed": "true", onclick: () => { S.ptEst = ""; renderTu(); } }, corto(S.ptEst), icon("x"))));
+  const rows = Object.entries(PUNT.trenes).filter(([n, p]) => p.n >= 10 && (!S.ptEst || (HOR.trenes[n] && HOR.trenes[n].s.some(s => s[0] === S.ptEst)) || p.o === S.ptEst || p.d === S.ptEst));
   const avg = f => rows.length ? Math.round(rows.reduce((a, [, p]) => a + f(p), 0) / rows.length) : 0;
-  k.append(el("div", { class: "kpi" }, el("small", { text: "Llegan en hora" }), el("b", { style: "color:var(--ok)", text: avg(p => p.p5) + "%" }), el("span", { text: "≤ 5 min" })),
+  pt.append(el("div", { class: "kpis" },
+    el("div", { class: "kpi" }, el("small", { text: "Llegan en hora" }), el("b", { style: "color:var(--ok)", text: avg(p => p.p5) + "%" }), el("span", { text: "5 min o menos" })),
     el("div", { class: "kpi" }, el("small", { text: "Retraso fuerte" }), el("b", { style: "color:var(--bad)", text: avg(p => p.p15) + "%" }), el("span", { text: "más de 15 min" })),
-    el("div", { class: "kpi" }, el("small", { text: "Trenes" }), el("b", { class: "num", text: rows.length }), el("span", { text: "10+ días con datos" })));
-  const ord = { peor: (a, b) => b[1].p15 - a[1].p15 || b[1].med - a[1].med, mejor: (a, b) => b[1].p5 - a[1].p5 || a[1].med - b[1].med, max: (a, b) => b[1].max - a[1].max };
-  const o = $("#pt-ord"); o.textContent = "";
-  for (const [key, lab] of [["peor", "Menos puntuales"], ["mejor", "Más puntuales"], ["max", "Mayor retraso"]]) o.append(el("button", { class: "chip", "aria-pressed": S.ptOrden === key ? "true" : "false", onclick: () => { S.ptOrden = key; renderDatos(); } }, lab));
-  rows.sort(ord[S.ptOrden]);
-  const l = $("#pt-list"); l.textContent = "";
-  if (!rows.length) l.append(el("div", { class: "li" }, el("span"), el("span", { class: "mid", text: "Sin datos para esta estación." }), el("span")));
-  for (const [n, p] of rows.slice(0, 40)) { const h = HOR.trenes[n];
-    l.append(el("button", { class: "li", onclick: () => { show("mapa"); openTrain(n); } }, el("span", { class: "tn", text: n }),
-      el("span", { class: "mid" }, el("b", { text: `${estNombre(p.o)} → ${estNombre(p.d)}` }), el("span", { text: `${h ? (PROD_NOMBRE[h.p] || h.p) + " · " : ""}${p.n} días · máx. ${p.max} min` })),
-      el("span", { class: "r" }, el("b", { style: `color:var(--${p.p15 >= 30 ? "bad" : p.p5 >= 80 ? "ok" : "warn"})`, text: `${p.p5}%` }), el("div", { style: "color:var(--muted)", text: `típico ${p.med}'` })))); }
-  renderAvisos(); renderFuentes();
+    el("div", { class: "kpi" }, el("small", { text: "Trenes" }), el("b", { class: "num", text: rows.length }), el("span", { text: "con 10+ días" }))));
+  const ord = { peor: (a, b) => b[1].p15 - a[1].p15 || b[1].med - a[1].med, mejor: (a, b) => b[1].p5 - a[1].p5 || a[1].med - b[1].med };
+  pt.append(el("div", { class: "seg", role: "group" }, ...[["peor", "Menos puntuales"], ["mejor", "Más puntuales"]].map(([k, l]) => el("button", { "aria-pressed": S.ptOrden === k ? "true" : "false", onclick: () => { S.ptOrden = k; renderTu(); } }, l))));
+  rows.sort(ord[S.ptOrden]); const list = el("div", { class: "card list" });
+  if (!rows.length) list.append(el("p", { class: "muted", style: "padding:14px", text: "Sin datos suficientes para esta estación." }));
+  for (const [n, p] of rows.slice(0, 25)) { const h = HOR.trenes[n];
+    list.append(el("button", { class: "li", onclick: () => openTrain(n) }, el("span", { class: "tn", text: n }),
+      el("span", { class: "mid" }, el("b", { text: `${corto(p.o)} → ${corto(p.d)}` }), el("span", { text: `${h ? (PROD_NOMBRE[h.p] || h.p) + " · " : ""}${p.n} días · máximo ${p.max} min` })),
+      el("span", { class: "r" }, el("b", { style: `color:var(--${p.p15 >= 30 ? "bad" : p.p5 >= 80 ? "ok" : "warn"})`, text: `${p.p5}%` }), el("div", { class: "muted", text: "en hora" })))); }
+  pt.append(list); box.append(pt);
+  // Avisos de la red
+  const av = el("div", { class: "sec" }, el("h2", { text: "Avisos de la red" }));
+  if (!hasAPI()) av.append(el("div", { class: "empty" }, el("b", { text: "Se activa con los datos en directo" }), "Aquí aparecen las incidencias que publica Adif, que afectan a todos los operadores, incluidos Iryo y Ouigo."));
+  else if (!S.avisos) av.append(el("p", { class: "muted", text: "Cargando avisos…" }));
+  else { if (S.avisos.fuentes && !S.avisos.fuentes.adif) av.append(el("p", { class: "muted", text: "Ahora mismo no se puede leer la web de Adif." }));
+    const it = S.avisos.avisos || []; if (!it.length) av.append(el("div", { class: "notice" }, icon("check"), el("span", { text: "Adif no informa de incidencias relevantes ahora mismo." }))); for (const a of it.slice(0, 15)) av.append(alertEl(a)); }
+  box.append(av);
+  // Fuentes
+  const f = el("div", { class: "sec", id: "fuentes" }, el("h2", { text: "De dónde salen los datos" }));
+  const modo = { live: "En directo. Se actualiza cada " + CONFIG.REFRESCO_S + " segundos.", mirror: "Posiciones de una copia pública que se refresca cada 15–30 minutos, a la espera del servidor en directo.", snapshot: `Foto real de las posiciones a las ${hhmm(S.now)}. No se mueve sin conexión.` }[S.mode];
+  f.append(el("div", { class: "notice" }, icon("info"), el("span", { text: modo })));
+  const src = el("div", { class: "sources" });
+  src.append(el("p", {}, "Posición y retraso: visor público de Renfe, ", el("code", { text: "tiempo-real.largorecorrido.renfe.com" }), ". No es una API documentada; si Renfe cambia el formato, hay que adaptar Llegada."));
+  src.append(el("p", {}, "Horarios y estaciones: datos abiertos de Renfe, ", el("code", { text: "data.renfe.com" }), ` (horario del ${fmtD(HOR.fecha)}).`));
+  src.append(el("p", { text: "Puntualidad: retraso máximo visto por tren y día en lecturas cada 15 minutos. Es una aproximación al retraso de llegada." }));
+  src.append(el("p", { text: "Iryo y Ouigo no publican la posición de sus trenes." }));
+  src.append(el("p", { text: "Llegada es un proyecto independiente, sin relación con Renfe ni Adif. Sirve para informarse; ante cualquier incidencia sigue las indicaciones del personal ferroviario." }));
+  f.append(src, el("div", { class: "row" }, el("button", { class: "btn ghost", onclick: () => { P.bienvenida = false; saveP(); welcome(); } }, "Ver la bienvenida otra vez"), el("button", { class: "btn ghost", style: "color:var(--bad)", onclick: e => { if (e.currentTarget.dataset.sure) { store.clear(); location.reload(); } else { e.currentTarget.dataset.sure = "1"; e.currentTarget.lastChild.textContent = "Pulsa otra vez para borrar"; } } }, icon("trash"), "Borrar mis datos")));
+  box.append(f);
 }
 const fmtD = s => s ? new Date(s + "T12:00:00").toLocaleDateString("es-ES", { day: "numeric", month: "long" }) : "—";
-$("#pt-est").addEventListener("change", renderDatos);
+async function loadAvisos() { if (!hasAPI()) return; if (loadAvisos._t && Date.now() - loadAvisos._t < 120000) return; loadAvisos._t = Date.now(); try { S.avisos = await (await fetchT(CONFIG.API + "/avisos")).json(); if (S.view === "tu" || S.view === "inicio") renderView(true); } catch {} }
 
-async function loadAvisos() { if (!hasAPI()) return; if (loadAvisos._t && Date.now() - loadAvisos._t < 120000) return; loadAvisos._t = Date.now(); try { S.avisos = await getJSON(CONFIG.API + "/avisos"); if (S.view === "datos") renderAvisos(); } catch {} }
-function renderAvisos() {
-  const box = $("#av-list"); box.textContent = "";
-  if (!hasAPI()) { box.append(el("div", { class: "empty" }, el("b", { text: "Se activa con el servidor en directo" }), "Cuando conectes el servidor intermedio, aquí aparecen las incidencias que publica Adif sobre el estado de la red, que afectan a todos los operadores (Renfe, Iryo y Ouigo).")); return; }
-  if (!S.avisos) { box.append(el("p", { class: "note", text: "Cargando avisos…" })); return; }
-  const items = S.avisos.avisos || [];
-  if (S.avisos.fuentes && !S.avisos.fuentes.adif) box.append(el("p", { class: "note", text: "No se ha podido leer la página de Adif ahora mismo. Si sigue así, puede que Adif haya cambiado su web." }));
-  if (!items.length) box.append(el("div", { class: "notice" }, icon("ok"), el("span", { text: "Adif no informa de incidencias relevantes ahora mismo." })));
-  for (const a of items.slice(0, 15)) box.append(el("div", { class: "alert" + (a.grave ? " bad" : "") }, el("b", { text: a.titulo }), a.texto ? el("span", { text: a.texto }) : null, el("small", { text: `${a.fuente}${a.fecha ? " · " + a.fecha : ""}` })));
-}
-function renderFuentes() {
-  const f = $("#fuentes"); f.textContent = "";
-  const modo = { live: "En directo a través de tu servidor intermedio. Se actualiza cada " + CONFIG.REFRESCO_S + " segundos.", mirror: "Sin servidor propio: posiciones de una copia pública en GitHub que se refresca cada 15–30 minutos.", snapshot: `Instantánea real de las posiciones de hoy a las ${hhmm(localParts(S.updated || new Date()).min)}. Los datos no se mueven hasta que conectes el servidor.` }[S.mode];
-  f.append(el("div", { class: "notice" }, icon("clock"), el("span", { text: modo })));
-  f.append(el("p", {}, "Posición y retraso: visor público de Renfe ", el("code", { text: "tiempo-real.largorecorrido.renfe.com" }), ". Renfe no tiene una API documentada; si cambia el formato, la app deja de recibir posiciones hasta que se adapte."));
-  f.append(el("p", {}, "Horarios y estaciones: GTFS oficial de Renfe en ", el("code", { text: "data.renfe.com" }), ` (horario del ${fmtD(HOR.fecha)}).`));
-  f.append(el("p", { text: "Puntualidad: retraso máximo observado por tren y día, a partir de lecturas cada 15 minutos. Es una aproximación al retraso de llegada." }));
-  f.append(el("p", { text: "Iryo y Ouigo no publican la posición de sus trenes. Sus incidencias llegan a través de los avisos de Adif." }));
-  f.append(el("p", { text: "Llegada es un proyecto independiente, sin relación con Renfe ni Adif. Sirve para informarse; en caso de incidencia sigue siempre las indicaciones del personal ferroviario." }));
+/* ============ Bienvenida ============ */
+function welcome() {
+  const ov = $("#welcome"); ov.textContent = ""; let casa = P.casa;
+  const nombre = el("input", { class: "input", id: "wl-nombre", placeholder: "Opcional", value: P.nombre, maxlength: 30 });
+  const chosen = el("b", { text: estNombre(casa) });
+  const card = el("form", { class: "welcome", onsubmit: e => { e.preventDefault(); P.nombre = nombre.value.trim(); P.casa = casa; P.bienvenida = true; saveP(); S.station = casa; store.set("station", casa); ov.hidden = true; renderView(); } },
+    el("svg"), el("h1", { text: "Bienvenido a Llegada" }),
+    el("p", { class: "lede", text: "Dónde está tu tren, si llega tarde y a qué hora salir a recoger a alguien. Dos datos y empezamos." }),
+    el("div", { class: "field" }, el("label", { for: "wl-nombre", text: "¿Cómo te llamas?" }), nombre),
+    el("div", { class: "field" }, el("span", { class: "lab", text: "Tu estación de siempre" }), el("div", { class: "row" }, icon("pin"), chosen),
+      stationPicker(c => { casa = c; chosen.textContent = estNombre(c); }, "Buscar otra estación"),
+      el("button", { class: "btn ghost", type: "button", onclick: () => locate((la, lo) => { casa = nearest(la, lo); chosen.textContent = estNombre(casa); }) }, icon("pin"), "Usar mi ubicación")),
+    el("button", { class: "btn primary", type: "submit", style: "padding:13px" }, "Empezar"));
+  card.firstChild.replaceWith($("#brand svg").cloneNode(true)); card.firstChild.setAttribute("class", "mark");
+  ov.append(card); ov.hidden = false;
 }
 
 /* ============ Navegación ============ */
-function show(v) { S.view = v; for (const s of document.querySelectorAll(".view")) s.hidden = s.id !== "v-" + v; for (const b of document.querySelectorAll(".tabs button")) b.setAttribute("aria-selected", b.dataset.v === v); if (v !== "mapa") $("#sheet").hidden = true; else if (S.selected) $("#sheet").hidden = false; renderView(); if (v === "mapa") requestAnimationFrame(resize); if (location.hash !== "#" + v) history.replaceState(null, "", "#" + v); }
-function renderView() { if (S.view === "estacion") renderEstacion(); else if (S.view === "recoger") renderRecoger(); else if (S.view === "seguir") renderSeguir(); else if (S.view === "datos") renderDatos(); }
+const VIEWS = ["inicio", "mapa", "estacion", "recoger", "tu"];
+function setHash(h) { if (location.hash !== "#" + h) try { history.replaceState(null, "", "#" + h); } catch {} }
+function show(v) {
+  S.view = v; for (const s of document.querySelectorAll(".view")) s.hidden = s.id !== "v-" + v;
+  for (const b of document.querySelectorAll(".tabs button")) b.setAttribute("aria-selected", b.dataset.v === v);
+  if (v === "mapa") { requestAnimationFrame(() => { resize(); draw(); }); if (!S.selected) $("#sheet").hidden = true; }
+  renderView(); if (!(v === "mapa" && S.selected)) setHash(v);
+  const vw = $("#v-" + v); if (vw && v !== "mapa") vw.scrollTop = 0;
+}
+function renderView(bg) {
+  // en las actualizaciones automáticas no repintamos mientras escribes
+  const a = document.activeElement; if (bg && a && /INPUT|SELECT/.test(a.tagName) && S.view !== "recoger" && $("#v-" + S.view).contains(a)) return;
+  if (S.view === "inicio") renderInicio(); else if (S.view === "estacion") renderEstacion(); else if (S.view === "recoger") renderRecoger(); else if (S.view === "tu") renderTu(); else if (S.view === "mapa") draw(); }
 for (const b of document.querySelectorAll(".tabs button")) b.addEventListener("click", () => show(b.dataset.v));
-addEventListener("hashchange", () => { const v = location.hash.slice(1); if (["mapa", "estacion", "recoger", "seguir", "datos"].includes(v) && v !== S.view) show(v); });
-document.addEventListener("keydown", e => { if (e.key === "Escape") { closeSheet(); $("#results").hidden = true; } });
+function route() { const h = location.hash.slice(1); if (h.startsWith("tren-")) { const n = h.slice(5).padStart(5, "0"); if (S.trains.length) openTrain(n); return true; } if (VIEWS.includes(h) && h !== S.view) show(h); return VIEWS.includes(h); }
+addEventListener("hashchange", route);
+document.addEventListener("keydown", e => { if (e.key === "Escape") { if (!$("#sheet").hidden) closeSheet(); $("#results").hidden = true; } });
+const dl = el("datalist", { id: "st-list" }); for (const s of ESTLIST) dl.append(el("option", { value: s.n })); document.body.append(dl);
 
 /* ============ Arranque ============ */
 (async function start() {
-  const v = location.hash.slice(1); show(["mapa", "estacion", "recoger", "seguir", "datos"].includes(v) ? v : "mapa");
+  const h = location.hash.slice(1);
+  show(VIEWS.includes(h) ? h : "inicio");
   await refresh();
+  if (h.startsWith("tren-")) openTrain(h.slice(5).padStart(5, "0"));
+  if (!P.bienvenida) welcome();
   setInterval(() => { if (S.mode !== "snapshot" || hasAPI()) refresh(); }, CONFIG.REFRESCO_S * 1000);
-  setInterval(() => { if (S.mode !== "snapshot") { S.now = localParts(new Date()).min; renderView(); } }, 30000);
-  if ("serviceWorker" in navigator && location.protocol === "https:" && !location.hostname.endsWith("claude.ai") && !location.hostname.includes("claudeusercontent")) navigator.serviceWorker.register("sw.js").catch(() => {});
+  setInterval(() => { if (S.mode !== "snapshot") { S.now = localParts(new Date()).min; renderStatus(); if (S.view !== "mapa") renderView(true); } }, 30000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && S.mode !== "snapshot") refresh(); });
+  if ("serviceWorker" in navigator && location.protocol === "https:" && /github\.io$|localhost/.test(location.hostname)) navigator.serviceWorker.register("sw.js").catch(() => {});
 })();
 </script>
 </body></html>

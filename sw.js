@@ -1,6 +1,6 @@
 /* Llegada · service worker: abre al instante y sin cobertura muestra lo último que tenía.
    Los datos en directo (servidor y espejo) nunca se guardan: siempre van a la red. */
-const VERSION = "llegada-v1";
+const VERSION = "llegada-v2";
 const BASE = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./data/estaciones.json"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(VERSION).then(c => c.addAll(BASE)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== VERSION).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
