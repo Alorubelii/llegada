@@ -1,4 +1,4 @@
-name: Comprobar servidor
+name: Comprobar servidor  # 0959
 on:
   workflow_dispatch:
   push:
