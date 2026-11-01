@@ -11,7 +11,8 @@ jobs:
       API: ${{ vars.LLEGADA_API || 'https://red-lake-b94e.stomvi7.workers.dev' }}
     steps:
       - name: Salud
-        run: curl -sS -m 20 "$API/salud"; echo
+        run: |
+          curl -sS -m 20 "$API/salud"; echo
       - name: Flota (trenes en circulación)
         run: |
           curl -sS -m 30 "$API/flota" -o flota.json -w "HTTP %{http_code}\n"
@@ -21,6 +22,8 @@ jobs:
           curl -sS -m 30 "$API/cercanias" -o c.json -w "HTTP %{http_code}\n"
           python3 -c "import json;d=json.load(open('c.json'));a=d if isinstance(d,list) else (d.get('trenes') or d.get('flota') or d);print(type(d).__name__, list(d.keys())[:8] if isinstance(d,dict) else len(d));print(json.dumps(a[0] if isinstance(a,list) and a else a,ensure_ascii=False)[:600])"
       - name: Avisos
-        run: curl -sS -m 30 "$API/avisos" | head -c 1500; echo
+        run: |
+          curl -sS -m 30 "$API/avisos" | head -c 1500; echo
       - name: CORS desde la web
-        run: curl -sS -m 20 -D - -o /dev/null -H "Origin: https://alorubelii.github.io" "$API/salud" | grep -i "access-control" || echo "SIN CABECERA CORS"
+        run: |
+          curl -sS -m 20 -D - -o /dev/null -H "Origin: https://alorubelii.github.io" "$API/salud" | grep -i "access-control" || echo "SIN CABECERA CORS"
