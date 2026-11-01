@@ -15,8 +15,8 @@ jobs:
   construir:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with: { python-version: "3.12" }
       - name: Descargar horarios oficiales de Renfe (GTFS)
         run: |
@@ -53,7 +53,7 @@ jobs:
           mkdir -p _site/data
           cp index.html manifest.webmanifest sw.js icon.svg icon-192.png icon-512.png _site/
           cp data/horarios-*.json data/estaciones.json _site/data/
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with: { path: _site }
   desplegar:
     needs: construir
